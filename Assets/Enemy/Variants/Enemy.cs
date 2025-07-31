@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour, IDamageable
+public abstract class Enemy : MonoBehaviour
 {
     public double maxHealth = 100;
     public double currentHealth;
@@ -31,7 +31,7 @@ public abstract class Enemy : MonoBehaviour, IDamageable
         transform.position += (Vector3)(dir * moveSpeed * Time.deltaTime);
     }
 
-    public virtual void DealDamage(double damage)
+    public virtual void ReceiveDamage(double damage)
     {
         currentHealth -= damage;
         if (currentHealth <= 0) Die();

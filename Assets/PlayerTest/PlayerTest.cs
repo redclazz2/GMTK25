@@ -1,16 +1,30 @@
+using System.Collections.Generic;   // para List<T>
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerTest : MonoBehaviour
 {
-    public float speed = 5f;
-
+    private StatsComponent statsComponent;
+    private RuneComponent runes;
     private InputSystem_Actions controls;
     private Vector2 moveInput;
+    public GameObject prefab;
 
     private void Awake()
     {
         controls = new InputSystem_Actions();
+    }
+
+    private void Start()
+    {
+        // 1) Referencias a componentes
+        statsComponent = GetComponent<StatsComponent>();
+        runes = GetComponent<RuneComponent>();
+
+        // 2) Inicializa los runes con una lista/array C# válido
+        //    Aquí asumimos que Initialize acepta IEnumerable<IAumentoState>
+        runes.AddState(new SpeedyRune());
+        runes.AddState(new SpawnerRuneState(prefab));
     }
 
     private void OnEnable()
@@ -34,6 +48,8 @@ public class PlayerTest : MonoBehaviour
 
     private void Update()
     {
+        // Usamos directamente la estadística actual
+        float speed = statsComponent.currentStats.moveSpeed;
         Vector3 movement = new Vector3(moveInput.x, moveInput.y, 0f);
         transform.position += movement * speed * Time.deltaTime;
     }
