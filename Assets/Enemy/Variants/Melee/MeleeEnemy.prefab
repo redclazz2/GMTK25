@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 7667527977223755083}
   - component: {fileID: 9058828816332700295}
   - component: {fileID: 3588112974017885135}
+  - component: {fileID: 212773520320002636}
   m_Layer: 0
   m_Name: MeleeEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,9 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f87f0e8de8619fdcf8f81eee277428e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  moveSpeed: 2
 --- !u!50 &9058828816332700295
 Rigidbody2D:
   serializedVersion: 5
@@ -168,3 +166,39 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &212773520320002636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9017571612917127973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98ae4cb10c984c4d982cc1ec7d72320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseStats:
+    damage: 0
+    lifeSteal: 0
+    cooldownReduction: 0
+    moveSpeed: 2
+    size: 0
+    maxHealth: 10
+    health: 0
+    regeneration: 0
+    shield: 0
+    armor: 0
+    criticalChance: 0
+  currentStats:
+    damage: 0
+    lifeSteal: 0
+    cooldownReduction: 0
+    moveSpeed: 0
+    size: 0
+    maxHealth: 0
+    health: 0
+    regeneration: 0
+    shield: 0
+    armor: 0
+    criticalChance: 0

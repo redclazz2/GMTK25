@@ -89,7 +89,13 @@ public class ProjectileMover : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            StatsComponent.Get(collision.gameObject).ApplyModifiers(new StatsBundle { health = -5 });
+            var player = GameObject.FindWithTag("Player");
+            collision.GetComponent<IDamageable>().ReceiveDamage(new DamageInfo
+            {
+                Attacker = player,
+                BaseAmount = player.GetComponent<StatsComponent>().currentStats.damage,
+                IsCritical = false,
+            });
             Debug.Log("Enemy hit!");
             Destroy(gameObject);
         }

@@ -2,16 +2,15 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    public double maxHealth = 100;
-    public double currentHealth;
-    public float moveSpeed = 2f;
+    private StatsComponent stats;
 
     protected Transform player;
 
     protected virtual void Start()
     {
-        currentHealth = maxHealth;
         player = GameObject.FindWithTag("Player")?.transform;
+        stats = StatsComponent.Get(gameObject);
+        stats.OnDie += Die;
     }
 
     protected virtual void Update()
@@ -28,13 +27,7 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void MoveTowardPlayer()
     {
         Vector2 dir = (player.position - transform.position).normalized;
-        transform.position += (Vector3)(dir * moveSpeed * Time.deltaTime);
-    }
-
-    public virtual void ReceiveDamage(double damage)
-    {
-        currentHealth -= damage;
-        if (currentHealth <= 0) Die();
+        transform.position += (Vector3)(dir * stats.currentStats.moveSpeed * Time.deltaTime);
     }
 
     protected virtual void Die()
