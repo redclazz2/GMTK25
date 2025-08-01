@@ -2,30 +2,24 @@ using UnityEngine;
 
 public abstract class PassiveRuneStateBase : IRuneState
 {
-    private readonly StatsBundle? _statDelta;
+    protected readonly RuneStateData _stateData;
     protected GameObject owner;
 
-    protected PassiveRuneStateBase(StatsBundle statDelta)
+    protected PassiveRuneStateBase(RuneStateData runeStateData)
     {
-        _statDelta = statDelta;
+        _stateData = runeStateData;
     }
 
     public virtual void Enter(GameObject owner)
     {
         this.owner = owner;
-        if (_statDelta != null)
-            owner.GetComponent<StatsComponent>().ApplyModifiers(_statDelta.Value);
+        owner.GetComponent<StatsComponent>().ApplyModifiers(_stateData.statDelta);
     }
 
-    public virtual void Tick(float dt)
-    {
-        // No periodic logic by default
-    }
+    public virtual void Tick(float dt) { }
 
     public virtual void Exit()
     {
-        if (_statDelta != null)
-            owner.GetComponent<StatsComponent>()
-                 .ApplyModifiers(-_statDelta.Value);
+        owner.GetComponent<StatsComponent>().ApplyModifiers(-_stateData.statDelta);
     }
 }

@@ -8,7 +8,7 @@ public class PlayerTest : MonoBehaviour
     private RuneComponent runes;
     private InputSystem_Actions controls;
     private Vector2 moveInput;
-    public GameObject prefab;
+    public RuneStateData stateToTest;
 
     private void Awake()
     {
@@ -17,14 +17,9 @@ public class PlayerTest : MonoBehaviour
 
     private void Start()
     {
-        // 1) Referencias a componentes
         statsComponent = GetComponent<StatsComponent>();
         runes = GetComponent<RuneComponent>();
-
-        // 2) Inicializa los runes con una lista/array C# válido
-        //    Aquí asumimos que Initialize acepta IEnumerable<IAumentoState>
-        runes.AddState(new SpeedyRune());
-        runes.AddState(new SpawnerRuneState(prefab));
+        runes.AddState(RuneFactory.Create(stateToTest));
     }
 
     private void OnEnable()
