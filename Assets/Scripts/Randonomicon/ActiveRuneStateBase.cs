@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class ActiveRuneStateBase : IRuneState
 {
-    private readonly RuneStateData _stateData;
+    protected readonly RuneStateData _stateData;
     protected GameObject owner;
     private readonly float _cooldownTime;
     private float _cooldownRemaining;

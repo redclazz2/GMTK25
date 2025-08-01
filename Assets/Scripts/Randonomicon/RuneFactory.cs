@@ -6,6 +6,8 @@ public static class RuneFactory
     {
         switch (data.runeType)
         {
+            case RuneType.ArcaneCircle:
+                return new RuneArcaneCircle(data);
             default:
                 Debug.LogError($"RuneFactory: tipo no reconocido {data.runeType}");
                 return null;

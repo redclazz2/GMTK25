@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class PassiveRuneStateBase : IRuneState
 {
-    private readonly RuneStateData _stateData;
+    protected readonly RuneStateData _stateData;
     protected GameObject owner;
 
     protected PassiveRuneStateBase(RuneStateData runeStateData)

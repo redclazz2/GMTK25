@@ -8,7 +8,7 @@ public class PlayerTest : MonoBehaviour
     private RuneComponent runes;
     private InputSystem_Actions controls;
     private Vector2 moveInput;
-    public GameObject prefab;
+    public RuneStateData stateToTest;
 
     private void Awake()
     {
@@ -19,8 +19,7 @@ public class PlayerTest : MonoBehaviour
     {
         statsComponent = GetComponent<StatsComponent>();
         runes = GetComponent<RuneComponent>();
-
-
+        runes.AddState(RuneFactory.Create(stateToTest));
     }
 
     private void OnEnable()
