@@ -1,4 +1,3 @@
-using System.Collections.Generic;   // para List<T>
 using UnityEngine;
 using UnityEngine.InputSystem;
 
