@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 212773520320002636, guid: bfdf3568e815d765b8b4f586253fb3cc, type: 3}
+      propertyPath: baseStats.moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4058344323748728245, guid: bfdf3568e815d765b8b4f586253fb3cc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.6313238
@@ -416,7 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f8f217f483ac0c8a54c89ebfe164c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6946047183458165588, guid: a99934e35d9486c429c6d9ab625b85fc, type: 3}
+  stateToTest: {fileID: 11400000, guid: 2d9b722e4f49256488bec94ec53c1075, type: 2}
 --- !u!114 &2109078953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,7 +434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseStats:
-    damage: 5
+    damage: 2
     lifeSteal: 0
     cooldownReduction: 0
     moveSpeed: 2
