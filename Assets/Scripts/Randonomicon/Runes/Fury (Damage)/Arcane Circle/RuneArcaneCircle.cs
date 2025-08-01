@@ -12,8 +12,7 @@ public class RuneArcaneCircle : PassiveRuneStateBase
     {
         base.Enter(owner);
         runeInstance = GameObject.Instantiate(_stateData.GetPrefab("circle01"), owner.transform);
-        runeInstance.transform.localPosition = Vector3.zero;
-        runeInstance.transform.localRotation = Quaternion.identity;
+        runeInstance.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         ArcaneCircleDamage arcaneCircle = runeInstance.GetComponent<ArcaneCircleDamage>();
         arcaneCircle.owner = owner;
         arcaneCircle.damage = StatsComponent.Get(owner).currentStats.damage;

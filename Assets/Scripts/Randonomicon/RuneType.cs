@@ -1,5 +1,7 @@
 public enum RuneType
 {
     // Fury (Damage Runes)
-    ArcaneCircle
+    ArcaneCircle,
+    Fireball,
+    ChainLightning
 }
