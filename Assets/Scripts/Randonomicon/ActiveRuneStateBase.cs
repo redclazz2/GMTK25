@@ -2,14 +2,14 @@ using UnityEngine;
 
 public abstract class ActiveRuneStateBase : IRuneState
 {
+    private readonly RuneStateData _stateData;
     protected GameObject owner;
-    private readonly StatsBundle? _statDelta;
     private readonly float _cooldownTime;
     private float _cooldownRemaining;
 
-    protected ActiveRuneStateBase(StatsBundle statDelta, float cooldownSeconds)
+    protected ActiveRuneStateBase(RuneStateData runeStateData, float cooldownSeconds)
     {
-        _statDelta = statDelta;
+        _stateData = runeStateData;
         _cooldownTime = cooldownSeconds;
         _cooldownRemaining = 0f;
     }
@@ -17,8 +17,7 @@ public abstract class ActiveRuneStateBase : IRuneState
     public virtual void Enter(GameObject owner)
     {
         this.owner = owner;
-        if (_statDelta != null)
-            owner.GetComponent<StatsComponent>().ApplyModifiers(_statDelta.Value);
+        owner.GetComponent<StatsComponent>().ApplyModifiers(_stateData.statDelta);
     }
 
     public virtual void Tick(float dt)
@@ -37,9 +36,7 @@ public abstract class ActiveRuneStateBase : IRuneState
 
     public virtual void Exit()
     {
-        if (_statDelta != null)
-            owner.GetComponent<StatsComponent>()
-                 .ApplyModifiers(-_statDelta.Value);
+        owner.GetComponent<StatsComponent>().ApplyModifiers(-_stateData.statDelta);
     }
 
     protected abstract bool CanTrigger();
