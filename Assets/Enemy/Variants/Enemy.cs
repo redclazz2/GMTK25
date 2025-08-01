@@ -8,20 +8,43 @@ public abstract class Enemy : MonoBehaviour
     private List<Vector2> currentPath;
     private int pathIndex;
     private float pathUpdateTimer = 0f;
-    private const float pathUpdateInterval = 2f;
+    
+    [Header("Movement")]
+    public float waypointReachDistance = 0.2f;
+    public float rotationSpeed = 10f;
+    public bool smoothRotation = true;
+    public bool predictiveMovement = true;
+    
+    [Header("Performance")]
+    [Tooltip("How often to update path (seconds). Higher = better performance")]
+    public float pathUpdateInterval = 1f;
+    [Tooltip("Distance from player before enemy stops updating (0 = always update)")]
+    public float maxUpdateDistance = 10f;
+    [Tooltip("Use less frequent updates when far from player")]
+    public bool useDistanceBasedUpdates = false;
     
     [Header("Debug")]
-    public bool showDebugInfo = true;
+    public bool showDebugInfo = false;
     public bool showPathGizmos = true;
+
+    private Vector2 lastPlayerPosition;
+    private Vector2 cachedPosition;
+    private float cachedMoveSpeed;
+    private bool hasValidPath;
     
-    [Header("Movement Settings")]
-    public float waypointReachDistance = 0.3f;
+    private float baseUpdateInterval;
+    private float lastDistanceToPlayer;
 
     protected virtual void Start()
     {
         player = GameObject.FindWithTag("Player")?.transform;
         stats = StatsComponent.Get(gameObject);
         stats.OnDie += Die;
+
+        baseUpdateInterval = pathUpdateInterval;
+        cachedPosition = transform.position;
+        lastPlayerPosition = player != null ? (Vector2)player.position : Vector2.zero;
+
         UpdatePath();
     }
 
@@ -30,128 +53,116 @@ public abstract class Enemy : MonoBehaviour
         if (player == null || stats == null)
             return;
 
+        cachedPosition = transform.position;
+        cachedMoveSpeed = stats.currentStats.moveSpeed;
+
+        if (useDistanceBasedUpdates && maxUpdateDistance > 0)
+        {
+            lastDistanceToPlayer = Vector2.Distance(cachedPosition, player.position);
+            if (lastDistanceToPlayer > maxUpdateDistance)
+                return;
+
+            pathUpdateInterval = baseUpdateInterval * (1f + lastDistanceToPlayer / 20f);
+        }
+
         pathUpdateTimer += Time.deltaTime;
         if (pathUpdateTimer >= pathUpdateInterval)
         {
-            UpdatePath();
+            Vector2 currentPlayerPos = player.position;
+            if (Vector2.Distance(lastPlayerPosition, currentPlayerPos) > 1f || !hasValidPath)
+            {
+                UpdatePath();
+                lastPlayerPosition = currentPlayerPos;
+            }
             pathUpdateTimer = 0f;
         }
 
-        FollowPath();
+        if (hasValidPath)
+        {
+            FollowPath();
+        }
     }
 
     void UpdatePath()
     {
         if (PathFinder.Instance == null) return;
 
-        Vector2 start = transform.position;
-        List<Vector2> newPath = PathFinder.Instance.GetPathFrom(start);
+        List<Vector2> newPath = PathFinder.Instance.GetPathFrom(cachedPosition);
         
         if (newPath != null && newPath.Count > 0)
         {
-            currentPath = newPath;
-            pathIndex = 0;
-            
-            if (showDebugInfo)
+            if (currentPath == null || PathSignificantlyChanged(newPath))
             {
-                Debug.Log($"{name}: New path with {currentPath.Count} waypoints");
-                Debug.Log($"{name}: Enemy position: {start}");
-                
-                // Print ALL waypoints to see what's in the path
-                for (int i = 0; i < currentPath.Count; i++)
-                {
-                    Debug.Log($"{name}: Waypoint {i}: {currentPath[i]}");
-                }
-                
-                Debug.Log($"{name}: Player position: {(Vector2)player.position}");
-                
-                // Check if path makes sense
-                if (currentPath.Count > 0)
-                {
-                    float distToFirst = Vector2.Distance(start, currentPath[0]);
-                    float distToLast = Vector2.Distance(currentPath[currentPath.Count-1], player.position);
-                    Debug.Log($"{name}: Distance to first waypoint: {distToFirst:F2}");
-                    Debug.Log($"{name}: Distance from last waypoint to player: {distToLast:F2}");
-                }
+                currentPath = newPath;
+                pathIndex = 0;
+                hasValidPath = true;
             }
         }
         else
         {
-            if (showDebugInfo) Debug.LogWarning($"{name}: No path found");
+            hasValidPath = false;
         }
+    }
+
+    bool PathSignificantlyChanged(List<Vector2> newPath)
+    {
+        if (currentPath == null || currentPath.Count != newPath.Count)
+            return true;
+
+        int checkCount = Mathf.Min(3, currentPath.Count, newPath.Count);
+        for (int i = 0; i < checkCount; i++)
+        {
+            if (Vector2.Distance(currentPath[i], newPath[i]) > 0.5f)
+                return true;
+        }
+        
+        return false;
     }
 
     void FollowPath()
     {
-        // No path - stop moving
-        if (currentPath == null || currentPath.Count == 0)
-        {
-            if (showDebugInfo) Debug.LogWarning($"{name}: No path to follow");
+        if (currentPath == null || currentPath.Count == 0 || pathIndex >= currentPath.Count)
             return;
-        }
-        
-        // Reached end of path
-        if (pathIndex >= currentPath.Count)
+
+        Vector2 targetWaypoint = currentPath[pathIndex];
+        Vector2 lookAheadTarget = targetWaypoint;
+
+        if (predictiveMovement && pathIndex + 1 < currentPath.Count)
         {
-            if (showDebugInfo) Debug.Log($"{name}: Completed path");
-            return;
+            float distanceToCurrentWaypoint = Vector2.Distance(cachedPosition, targetWaypoint);
+            if (distanceToCurrentWaypoint < waypointReachDistance * 2f)
+            {
+                Vector2 nextWaypoint = currentPath[pathIndex + 1];
+                float blendFactor = 1f - (distanceToCurrentWaypoint / (waypointReachDistance * 2f));
+                lookAheadTarget = Vector2.Lerp(targetWaypoint, nextWaypoint, blendFactor * 0.5f);
+            }
         }
 
-        Vector2 currentPos = transform.position;
-        
-        // CRITICAL: Use the CURRENT waypoint (pathIndex), NOT the final waypoint!
-        Vector2 targetWaypoint = currentPath[pathIndex];
-        
-        // DOUBLE CHECK: Make sure we're not accidentally using the wrong waypoint
-        if (showDebugInfo && Time.frameCount % 60 == 0)
-        {
-            Debug.Log($"{name}: Target is waypoint {pathIndex}: {targetWaypoint}");
-            Debug.Log($"{name}: NOT the final waypoint {currentPath.Count-1}: {currentPath[currentPath.Count-1]}");
-            Debug.Log($"{name}: NOT the player position: {(Vector2)player.position}");
-        }
-        
-        // NEVER use player position for movement!
-        // Vector2 playerPos = (Vector2)player.position; // DON'T DO THIS
-        
-        float distanceToWaypoint = Vector2.Distance(currentPos, targetWaypoint);
-        
-        if (showDebugInfo && Time.frameCount % 60 == 0)
-        {
-            Debug.Log($"{name}: Following waypoint {pathIndex}/{currentPath.Count} at {targetWaypoint}");
-            Debug.Log($"{name}: Distance to waypoint: {distanceToWaypoint:F2}");
-            Debug.Log($"{name}: Current position: {currentPos}");
-        }
-        
-        // Check if we've reached the current waypoint
-        if (distanceToWaypoint <= waypointReachDistance)
+        float distanceToTarget = Vector2.Distance(cachedPosition, targetWaypoint);
+        if (distanceToTarget <= waypointReachDistance)
         {
             pathIndex++;
-            if (showDebugInfo) 
-                Debug.Log($"{name}: ✓ Reached waypoint {pathIndex - 1}! Moving to {pathIndex}");
-            
-            // If we've completed the path, stop
             if (pathIndex >= currentPath.Count)
             {
-                if (showDebugInfo) Debug.Log($"{name}: ✓ Reached final destination!");
+                hasValidPath = false;
                 return;
             }
-            
-            // Update target to next waypoint
-            targetWaypoint = currentPath[pathIndex];
         }
-        
-        // Move toward the CURRENT WAYPOINT (not the player!)
-        Vector2 direction = (targetWaypoint - currentPos).normalized;
-        float moveDistance = stats.currentStats.moveSpeed * Time.deltaTime;
-        
-        // Apply movement
-        Vector2 newPosition = Vector2.MoveTowards(currentPos, targetWaypoint, moveDistance);
+
+        Vector2 moveDirection = (lookAheadTarget - cachedPosition).normalized;
+        float moveDistance = cachedMoveSpeed * Time.deltaTime;
+        Vector2 newPosition = cachedPosition + moveDirection * moveDistance;
         transform.position = newPosition;
-        
-        // Debug movement
-        if (showDebugInfo && Time.frameCount % 60 == 0)
+
+        if (smoothRotation && moveDirection.sqrMagnitude > 0.01f)
         {
-            Debug.Log($"{name}: Moving {direction * moveDistance} toward waypoint {pathIndex}");
+            float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+            float currentAngle = transform.eulerAngles.z;
+            float angleDiff = Mathf.DeltaAngle(currentAngle, targetAngle);
+            float rotationStep = rotationSpeed * Time.deltaTime;
+            angleDiff = Mathf.Clamp(angleDiff, -rotationStep, rotationStep);
+            float newAngle = currentAngle + angleDiff;
+            transform.rotation = Quaternion.Euler(0, 0, newAngle);
         }
     }
 
@@ -159,77 +170,82 @@ public abstract class Enemy : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    
+
+    public void GetPerformanceInfo(out float updateInterval, out float distanceToPlayer)
+    {
+        updateInterval = pathUpdateInterval;
+        distanceToPlayer = lastDistanceToPlayer;
+    }
+
     void OnDrawGizmos()
     {
         if (!showPathGizmos) return;
         
         Vector2 currentPos = transform.position;
-        
-        // Draw the path with waypoint numbers
+
         if (currentPath != null && currentPath.Count > 0)
         {
-            // Draw completed portion in green
             Gizmos.color = Color.green;
             for (int i = 0; i < pathIndex && i < currentPath.Count; i++)
             {
                 Gizmos.DrawSphere(currentPath[i], 0.08f);
-                if (i > 0)
-                    Gizmos.DrawLine(currentPath[i-1], currentPath[i]);
             }
-            
-            // Draw remaining path in yellow
+
             Gizmos.color = Color.yellow;
-            Vector2 prevPos = pathIndex > 0 ? currentPath[pathIndex - 1] : currentPos;
-            
+            Vector2 prevPos = currentPos;
+
             for (int i = pathIndex; i < currentPath.Count; i++)
             {
                 if (i == pathIndex)
                 {
-                    // Current target waypoint in RED
                     Gizmos.color = Color.red;
-                    Gizmos.DrawSphere(currentPath[i], 0.15f);
-                    
-                    // Show reach distance
-                    Gizmos.color = Color.cyan;
-                    Gizmos.DrawWireSphere(currentPath[i], waypointReachDistance);
-                    
-                    // Draw movement line
-                    Gizmos.color = Color.white;
-                    Gizmos.DrawLine(currentPos, currentPath[i]);
-                    
+                    Gizmos.DrawSphere(currentPath[i], 0.12f);
                     Gizmos.color = Color.yellow;
                 }
                 else
                 {
-                    Gizmos.DrawSphere(currentPath[i], 0.08f);
+                    Gizmos.DrawSphere(currentPath[i], 0.06f);
                 }
-                
-                // Draw connections
+
                 Gizmos.DrawLine(prevPos, currentPath[i]);
                 prevPos = currentPath[i];
             }
-            
-            // Draw waypoint numbers
-            #if UNITY_EDITOR
-            for (int i = 0; i < currentPath.Count; i++)
+
+            if (predictiveMovement && pathIndex < currentPath.Count)
             {
-                UnityEditor.Handles.color = i == pathIndex ? Color.red : Color.white;
-                UnityEditor.Handles.Label(currentPath[i] + Vector2.up * 0.2f, i.ToString());
+                Vector2 targetWaypoint = currentPath[pathIndex];
+                if (pathIndex + 1 < currentPath.Count)
+                {
+                    float distanceToCurrentWaypoint = Vector2.Distance(currentPos, targetWaypoint);
+                    if (distanceToCurrentWaypoint < waypointReachDistance * 2f)
+                    {
+                        Vector2 nextWaypoint = currentPath[pathIndex + 1];
+                        float blendFactor = 1f - (distanceToCurrentWaypoint / (waypointReachDistance * 2f));
+                        Vector2 lookAheadTarget = Vector2.Lerp(targetWaypoint, nextWaypoint, blendFactor * 0.5f);
+
+                        Gizmos.color = Color.cyan;
+                        Gizmos.DrawSphere(lookAheadTarget, 0.08f);
+                        Gizmos.DrawLine(currentPos, lookAheadTarget);
+                    }
+                }
             }
-            #endif
         }
-        
-        // Draw enemy
+
         Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(currentPos, 0.12f);
-        
-        // Show what direction the enemy is facing
-        if (currentPath != null && pathIndex < currentPath.Count)
+        Gizmos.DrawSphere(currentPos, 0.1f);
+
+        if (smoothRotation)
         {
-            Vector2 facingDirection = (currentPath[pathIndex] - currentPos).normalized;
+            Vector2 facingDir = new Vector2(Mathf.Cos(transform.eulerAngles.z * Mathf.Deg2Rad), 
+                                            Mathf.Sin(transform.eulerAngles.z * Mathf.Deg2Rad));
             Gizmos.color = Color.white;
-            Gizmos.DrawRay(currentPos, facingDirection * 0.5f);
+            Gizmos.DrawRay(currentPos, facingDir * 0.5f);
+        }
+
+        if (useDistanceBasedUpdates && maxUpdateDistance > 0)
+        {
+            Gizmos.color = new Color(1f, 1f, 0f, 0.1f);
+            Gizmos.DrawWireSphere(currentPos, maxUpdateDistance);
         }
     }
 }

@@ -51,7 +51,7 @@ public class GridManager : MonoBehaviour
         );
     }
 
-    void OnDrawGizmos()
+    /*void OnDrawGizmos()
     {
         if (gridSize.x <= 0 || gridSize.y <= 0 || nodes == null || nodes.Count == 0) return;
 
@@ -64,6 +64,6 @@ public class GridManager : MonoBehaviour
         // Optional: draw world origin
         Gizmos.color = Color.green;
         Gizmos.DrawSphere(transform.position, 0.1f);
-    }
+    }*/
 
 }
