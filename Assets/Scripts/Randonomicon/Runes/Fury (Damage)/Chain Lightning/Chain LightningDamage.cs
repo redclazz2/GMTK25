@@ -54,7 +54,7 @@ public class ChainLightningDamage : MonoBehaviour
 
         var nearest10 = enemies
             .OrderBy(e => Vector2.Distance(transform.position, e.transform.position))
-            .Take(10)
+            .Take(3)
             .ToArray();
 
         var choice = nearest10[Random.Range(0, nearest10.Length)];

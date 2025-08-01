@@ -195,7 +195,7 @@ MonoBehaviour:
     damage: 0
     lifeSteal: 0
     cooldownReduction: 0
-    moveSpeed: 2.4
+    moveSpeed: 1.4
     size: 0
     maxHealth: 15
     health: 0
