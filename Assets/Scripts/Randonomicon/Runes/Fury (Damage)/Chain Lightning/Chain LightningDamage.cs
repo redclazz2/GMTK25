@@ -9,7 +9,6 @@ public class ChainLightningDamage : MonoBehaviour
     [HideInInspector] public float criticalChance;
     [HideInInspector] public float velocity = 5f;
     [HideInInspector] public int maxBounces = 3;
-    [Tooltip("How close we must be to count as a hit")]
     public float impactRadius = 0.5f;
 
     private Transform currentTarget;
