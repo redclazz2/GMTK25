@@ -1,123 +1,49 @@
 using UnityEngine;
 
-public class WandMovement : MonoBehaviour
+public class WandMovement2D : MonoBehaviour
 {
     [Header("Orbit Settings")]
     public float orbitRadius = 2f;
-    public float orbitSpeed = 90f; // degrees per second
-
-    [Header("Optional Settings")]
+    public float orbitSpeed = 90f;
     public bool clockwise = true;
-    public Vector3 orbitAxis = Vector3.forward; // axis to orbit around (for 3D)
 
     private Transform parentTransform;
-    private float currentAngle = 0f;
+    private float currentAngle;
 
     void Start()
     {
-        // Get parent transform
         parentTransform = transform.parent;
-
         if (parentTransform == null)
         {
-            Debug.LogWarning("WandMovement: No parent found! This script requires a parent object.");
             enabled = false;
             return;
         }
 
-        // Pick random starting angle
         currentAngle = Random.Range(0f, 360f);
-
-        // Set initial position at orbit radius
-        Vector3 initialPosition = CalculateOrbitPosition();
-        transform.localPosition = initialPosition;
+        UpdatePositionAndRotation();
     }
 
     void Update()
     {
-        if (parentTransform == null) return;
-
-        // Rotate around parent
-        float rotationDirection = clockwise ? -1f : 1f;
-        currentAngle += orbitSpeed * rotationDirection * Time.deltaTime;
-
-        // Keep angle in 0-360 range
-        if (currentAngle >= 360f) currentAngle -= 360f;
-        if (currentAngle < 0f) currentAngle += 360f;
-
-        // Calculate new position
-        Vector3 newLocalPosition = CalculateOrbitPosition();
-        transform.localPosition = newLocalPosition;
+        float dirSign = clockwise ? -1f : 1f;
+        currentAngle += orbitSpeed * dirSign * Time.deltaTime;
+        currentAngle %= 360f;
+        UpdatePositionAndRotation();
     }
 
-    Vector3 CalculateOrbitPosition()
+    private void UpdatePositionAndRotation()
     {
-        // Convert angle to radians
-        float angleInRadians = currentAngle * Mathf.Deg2Rad;
+        // 1) Position
+        float rad = currentAngle * Mathf.Deg2Rad;
+        float x = Mathf.Cos(rad) * orbitRadius;
+        float y = Mathf.Sin(rad) * orbitRadius;
+        transform.localPosition = new Vector3(x, y, 0f);
 
-        // For 2D orbiting (in XY plane)
-        if (orbitAxis == Vector3.forward || orbitAxis == Vector3.back)
-        {
-            float x = Mathf.Cos(angleInRadians) * orbitRadius;
-            float y = Mathf.Sin(angleInRadians) * orbitRadius;
-            return new Vector3(x, y, 0f);
-        }
-        // For 3D orbiting around Y axis
-        else if (orbitAxis == Vector3.up || orbitAxis == Vector3.down)
-        {
-            float x = Mathf.Cos(angleInRadians) * orbitRadius;
-            float z = Mathf.Sin(angleInRadians) * orbitRadius;
-            return new Vector3(x, 0f, z);
-        }
-        // For 3D orbiting around X axis
-        else if (orbitAxis == Vector3.right || orbitAxis == Vector3.left)
-        {
-            float y = Mathf.Cos(angleInRadians) * orbitRadius;
-            float z = Mathf.Sin(angleInRadians) * orbitRadius;
-            return new Vector3(0f, y, z);
-        }
-
-        // Default to XY plane
-        float defaultX = Mathf.Cos(angleInRadians) * orbitRadius;
-        float defaultY = Mathf.Sin(angleInRadians) * orbitRadius;
-        return new Vector3(defaultX, defaultY, 0f);
-    }
-
-    // Public methods to control the wand
-    public void SetOrbitRadius(float newRadius)
-    {
-        orbitRadius = newRadius;
-        // Immediately update position with new radius
-        Vector3 newPosition = CalculateOrbitPosition();
-        transform.localPosition = newPosition;
-    }
-
-    public void SetOrbitSpeed(float newSpeed)
-    {
-        orbitSpeed = newSpeed;
-    }
-
-    public void SetClockwise(bool isClockwise)
-    {
-        clockwise = isClockwise;
-    }
-
-    public void ResetToNewRadius(float newRadius)
-    {
-        orbitRadius = newRadius;
-        currentAngle = Random.Range(0f, 360f);
-        Vector3 newPosition = CalculateOrbitPosition();
-        transform.localPosition = newPosition;
-    }
-
-    // Get current orbit info
-    public float GetCurrentAngle()
-    {
-        return currentAngle;
-    }
-
-    public float GetCurrentRadius()
-    {
-        return orbitRadius;
+        // 2) Rotation (point away from center)
+        //    dirVec points from parent to wand in local space
+        Vector2 dirVec = new Vector2(x, y).normalized;
+        float angle = Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
+        // If your wand sprite by default points 'up' (along +Y), subtract 90°
+        transform.localRotation = Quaternion.Euler(0f, 0f, angle - 90f);
     }
 }

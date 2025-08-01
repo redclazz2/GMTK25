@@ -122,6 +122,10 @@ public class FireballDamage : MonoBehaviour
                 enemyTimers.Add(damageable, 0f);
             }
         }
+        else if(!other.CompareTag("Player"))
+        {
+            DestroyFireball();
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -180,6 +184,11 @@ public class FireballDamage : MonoBehaviour
             BaseAmount = damage,
             IsCritical = isCritical
         });
+    }
+
+    private void OnBecameInvisible()
+    {
+        DestroyFireball();
     }
 
     void DestroyFireball()
