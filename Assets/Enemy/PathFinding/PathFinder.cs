@@ -7,11 +7,21 @@ public class PathFinder : MonoBehaviour
     public GridManager grid;
     public Transform player;
 
+    [Header("Smoothing")]
+    public bool enablePathSmoothing = true;
+    public bool enableDiagonalMovement = true;
+    public float cornerCuttingDistance = 0.3f;
+
+    [Header("Performance")]
+    public float updateInterval = 0.1f;
+
+    private Vector2Int lastPlayerGridPos = Vector2Int.one * int.MinValue;
+    private float lastUpdateTime;
+
     void Awake()
     {
         if (Instance != null && Instance != this)
         {
-            Debug.LogWarning("Duplicate PathFinder in scene. Destroying extra.");
             Destroy(gameObject);
             return;
         }
@@ -20,15 +30,20 @@ public class PathFinder : MonoBehaviour
 
     void Update()
     {
-        if (player != null)
+        if (player != null && Time.time - lastUpdateTime >= updateInterval)
         {
-            RunReverseAStar(grid.WorldToGrid(player.position));
+            Vector2Int currentGridPos = grid.WorldToGrid(player.position);
+            if (currentGridPos != lastPlayerGridPos)
+            {
+                RunReverseAStar(currentGridPos);
+                lastPlayerGridPos = currentGridPos;
+                lastUpdateTime = Time.time;
+            }
         }
     }
 
     void RunReverseAStar(Vector2Int start)
     {
-        // Reset all nodes
         foreach (var node in grid.nodes.Values)
         {
             node.cost = float.MaxValue;
@@ -52,7 +67,7 @@ public class PathFinder : MonoBehaviour
             openSet.Remove(current);
             current.inClosedSet = true;
 
-            foreach (var neighbor in GetNeighbors(current))
+            foreach (var neighbor in enableDiagonalMovement ? GetNeighborsWithDiagonals(current) : GetNeighbors(current))
             {
                 if (neighbor.inClosedSet) continue;
 
@@ -82,41 +97,112 @@ public class PathFinder : MonoBehaviour
 
     float GetMovementCost(GridNode from, GridNode to)
     {
+        Vector2Int diff = to.position - from.position;
+        if (Mathf.Abs(diff.x) == 1 && Mathf.Abs(diff.y) == 1)
+            return 1.414f;
         return 1f;
     }
 
     public List<Vector2> GetPathFrom(Vector2 worldPos)
     {
         Vector2Int gridPos = grid.WorldToGrid(worldPos);
-        if (!grid.nodes.TryGetValue(gridPos, out var startNode))
-            return new List<Vector2>();
 
-        // If no path to player (cost is still MaxValue), return empty
+        if (!grid.nodes.TryGetValue(gridPos, out var startNode) || !startNode.walkable)
+        {
+            gridPos = FindNearestWalkableTile(gridPos);
+            if (gridPos == Vector2Int.one * int.MinValue || !grid.nodes.TryGetValue(gridPos, out startNode))
+                return new List<Vector2>();
+        }
+
         if (startNode.cost == float.MaxValue)
             return new List<Vector2>();
 
-        List<Vector2> path = new();
+        List<Vector2> rawPath = new();
         var current = startNode;
 
-        // In reverse A*, cameFrom points toward the start (player)
-        // So we follow cameFrom to get closer to the player
         while (current != null && current.cameFrom != null)
         {
             current = current.cameFrom;
-            path.Add(grid.GridToWorld(current.position));
+            rawPath.Add(grid.GridToWorld(current.position));
         }
 
-        // Now path goes from enemy toward player
-        // First waypoint is the next step, last waypoint is near the player
-
-        // Debug output
-        Debug.Log($"Generated path from {worldPos} to player with {path.Count} waypoints:");
-        for (int i = 0; i < path.Count; i++)
+        if (enablePathSmoothing && rawPath.Count > 0)
         {
-            Debug.Log($"Waypoint {i}: {path[i]}");
+            List<Vector2> smoothedPath = SmoothPath(worldPos, rawPath);
+            return smoothedPath;
         }
 
-        return path;
+        return rawPath;
+    }
+
+    List<Vector2> SmoothPath(Vector2 startPos, List<Vector2> originalPath)
+    {
+        if (originalPath.Count <= 1) return originalPath;
+
+        List<Vector2> smoothedPath = new();
+        Vector2 currentPos = startPos;
+        int pathIndex = 0;
+
+        while (pathIndex < originalPath.Count)
+        {
+            int furthestVisibleIndex = pathIndex;
+
+            for (int i = pathIndex + 1; i < originalPath.Count; i++)
+            {
+                if (HasClearLineOfSight(currentPos, originalPath[i]))
+                    furthestVisibleIndex = i;
+                else
+                    break;
+            }
+
+            smoothedPath.Add(originalPath[furthestVisibleIndex]);
+            currentPos = originalPath[furthestVisibleIndex];
+            pathIndex = furthestVisibleIndex + 1;
+        }
+
+        return smoothedPath;
+    }
+
+    bool HasClearLineOfSight(Vector2 from, Vector2 to)
+    {
+        float distance = Vector2.Distance(from, to);
+        Vector2 direction = (to - from).normalized;
+        RaycastHit2D hit = Physics2D.Raycast(from, direction, distance, grid.terrainMask);
+        return hit.collider == null;
+    }
+
+    List<Vector2> GetCornerCutPath(List<Vector2> originalPath)
+    {
+        if (originalPath.Count <= 2) return originalPath;
+
+        List<Vector2> cuttingPath = new();
+        cuttingPath.Add(originalPath[0]);
+
+        for (int i = 1; i < originalPath.Count - 1; i++)
+        {
+            Vector2 prev = originalPath[i - 1];
+            Vector2 current = originalPath[i];
+            Vector2 next = originalPath[i + 1];
+
+            Vector2 dir1 = (current - prev).normalized;
+            Vector2 dir2 = (next - current).normalized;
+
+            float angle = Vector2.Angle(dir1, dir2);
+
+            if (angle > 45f)
+            {
+                Vector2 cutPoint = current + (prev - current).normalized * cornerCuttingDistance +
+                                            (next - current).normalized * cornerCuttingDistance;
+                cuttingPath.Add(cutPoint);
+            }
+            else
+            {
+                cuttingPath.Add(current);
+            }
+        }
+
+        cuttingPath.Add(originalPath[originalPath.Count - 1]);
+        return cuttingPath;
     }
 
     List<GridNode> GetNeighbors(GridNode node)
@@ -136,68 +222,57 @@ public class PathFinder : MonoBehaviour
 
         return neighbors;
     }
-}
 
-// Same Priority Queue implementation
-public class PriorityQueue<T>
-{
-    private List<(T item, float priority)> elements = new();
-
-    public int Count => elements.Count;
-
-    public void Enqueue(T item, float priority)
+    Vector2Int FindNearestWalkableTile(Vector2Int startPos)
     {
-        elements.Add((item, priority));
-        int childIndex = elements.Count - 1;
-        while (childIndex > 0)
+        for (int radius = 1; radius <= 10; radius++)
         {
-            int parentIndex = (childIndex - 1) / 2;
-            if (elements[childIndex].priority >= elements[parentIndex].priority)
-                break;
-
-            var temp = elements[childIndex];
-            elements[childIndex] = elements[parentIndex];
-            elements[parentIndex] = temp;
-
-            childIndex = parentIndex;
-        }
-    }
-
-    public T Dequeue()
-    {
-        if (elements.Count == 0)
-            throw new System.InvalidOperationException("Queue is empty");
-
-        var result = elements[0].item;
-        elements[0] = elements[elements.Count - 1];
-        elements.RemoveAt(elements.Count - 1);
-
-        if (elements.Count > 0)
-        {
-            int parentIndex = 0;
-            while (true)
+            for (int x = -radius; x <= radius; x++)
             {
-                int leftChild = 2 * parentIndex + 1;
-                int rightChild = 2 * parentIndex + 2;
-                int smallest = parentIndex;
+                for (int y = -radius; y <= radius; y++)
+                {
+                    if (Mathf.Abs(x) != radius && Mathf.Abs(y) != radius) continue;
 
-                if (leftChild < elements.Count && elements[leftChild].priority < elements[smallest].priority)
-                    smallest = leftChild;
+                    Vector2Int checkPos = startPos + new Vector2Int(x, y);
 
-                if (rightChild < elements.Count && elements[rightChild].priority < elements[smallest].priority)
-                    smallest = rightChild;
-
-                if (smallest == parentIndex)
-                    break;
-
-                var temp = elements[parentIndex];
-                elements[parentIndex] = elements[smallest];
-                elements[smallest] = temp;
-
-                parentIndex = smallest;
+                    if (grid.nodes.TryGetValue(checkPos, out var node) && node.walkable)
+                        return checkPos;
+                }
             }
         }
 
-        return result;
+        return Vector2Int.one * int.MinValue;
+    }
+
+    List<GridNode> GetNeighborsWithDiagonals(GridNode node)
+    {
+        List<GridNode> neighbors = new();
+        Vector2Int[] directions = {
+            Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right,
+            new Vector2Int(1, 1), new Vector2Int(-1, 1),
+            new Vector2Int(1, -1), new Vector2Int(-1, -1)
+        };
+
+        foreach (var dir in directions)
+        {
+            Vector2Int pos = node.position + dir;
+            if (grid.nodes.TryGetValue(pos, out GridNode neighbor) && neighbor.walkable)
+            {
+                if (Mathf.Abs(dir.x) == 1 && Mathf.Abs(dir.y) == 1)
+                {
+                    bool horizontalClear = grid.nodes.TryGetValue(node.position + new Vector2Int(dir.x, 0), out var h) && h.walkable;
+                    bool verticalClear = grid.nodes.TryGetValue(node.position + new Vector2Int(0, dir.y), out var v) && v.walkable;
+
+                    if (horizontalClear && verticalClear)
+                        neighbors.Add(neighbor);
+                }
+                else
+                {
+                    neighbors.Add(neighbor);
+                }
+            }
+        }
+
+        return neighbors;
     }
 }
