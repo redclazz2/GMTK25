@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Drop
   - Terrain
+  - CastPlayer
   layers:
   - Default
   - TransparentFX
@@ -44,11 +45,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: RunesEffects
-    uniqueID: 1366882037
-    locked: 0
   - name: Terrain
     uniqueID: 3367140047
+    locked: 0
+  - name: RunesEffects
+    uniqueID: 1366882037
     locked: 0
   - name: Entities
     uniqueID: 1922970429
