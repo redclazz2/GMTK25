@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     protected StatsComponent stats;
-    private Transform player;
+    protected Transform player;
     private List<Vector2> currentPath;
     private int pathIndex;
     private float pathUpdateTimer = 0f;

@@ -17,7 +17,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Enemies
   - Terrain
   - 
   - 
@@ -55,6 +55,9 @@ TagManager:
     locked: 0
   - name: Effects
     uniqueID: 750225601
+    locked: 0
+  - name: Shadows
+    uniqueID: 527220969
     locked: 0
   m_RenderingLayers:
   - Default
