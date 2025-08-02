@@ -4,7 +4,7 @@ public abstract class ActiveRuneStateBase : IRuneState
 {
     protected readonly RuneStateData _stateData;
     protected GameObject owner;
-    private readonly float _cooldownTime;
+    private float _cooldownTime;
     private float _cooldownRemaining;
 
     protected ActiveRuneStateBase(RuneStateData runeStateData, float cooldownSeconds)
@@ -23,7 +23,7 @@ public abstract class ActiveRuneStateBase : IRuneState
     public virtual void Tick(float dt)
     {
         // Check cooldown changes
-
+        _cooldownTime -= StatsComponent.Get(owner).currentStats.cooldownReduction;
 
         // Reduce cooldown
         if (_cooldownRemaining > 0f)
