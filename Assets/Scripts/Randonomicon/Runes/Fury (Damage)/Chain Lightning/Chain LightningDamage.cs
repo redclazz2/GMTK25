@@ -7,17 +7,20 @@ public class ChainLightningDamage : MonoBehaviour
     [HideInInspector] public GameObject owner;
     [HideInInspector] public float damage;
     [HideInInspector] public float criticalChance;
-    [HideInInspector] public float velocity = 5f;
-    [HideInInspector] public int maxBounces = 3;
-    public float impactRadius = 0.5f;
+    [SerializeField] private float velocity = 5f;
+    [SerializeField] private int maxBounces = 6;
+    [SerializeField] private float impactRadius = 1f;
+    [SerializeField] private float bounceRadius = 4f; // Radius to search for next bounce target
+    [SerializeField] private float maxLifetime = 2f; // Maximum lifetime to prevent stuck projectiles
 
     private Transform currentTarget;
     private Vector2 currentDirection;
     private int bouncesRemaining;
     private readonly List<IDamageable> hitEnemies = new();
     private bool isFirstSpawn = true;
-    private float noEnemyTimer;
-    private const float NO_ENEMY_LIFETIME = 3f;
+    private float totalLifetime = 0f;
+    private float noTargetTimer = 0f;
+    private const float NO_TARGET_LIFETIME = 2f;
     private Vector2 lastHitPosition;
 
     void Start()
@@ -28,14 +31,29 @@ public class ChainLightningDamage : MonoBehaviour
 
     void Update()
     {
-        if (isFirstSpawn && currentTarget == null)
+        totalLifetime += Time.deltaTime;
+
+        // Safety check: destroy if alive too long
+        if (totalLifetime >= maxLifetime)
         {
-            noEnemyTimer += Time.deltaTime;
-            if (noEnemyTimer >= NO_ENEMY_LIFETIME)
+            DestroyProjectile();
+            return;
+        }
+
+        // Handle case where no target is found (initial or bounce)
+        if (currentTarget == null)
+        {
+            noTargetTimer += Time.deltaTime;
+            if (noTargetTimer >= NO_TARGET_LIFETIME)
             {
                 DestroyProjectile();
                 return;
             }
+        }
+        else
+        {
+            // Reset timer when we have a target
+            noTargetTimer = 0f;
         }
 
         MoveTowardsTarget();
@@ -52,31 +70,42 @@ public class ChainLightningDamage : MonoBehaviour
             return;
         }
 
-        var nearest10 = enemies
+        // Pick from nearest 3 enemies (no radius restriction for initial target)
+        var nearest3 = enemies
             .OrderBy(e => Vector2.Distance(transform.position, e.transform.position))
             .Take(3)
             .ToArray();
 
-        var choice = nearest10[Random.Range(0, nearest10.Length)];
+        var choice = nearest3[Random.Range(0, nearest3.Length)];
         currentTarget = choice.transform;
         isFirstSpawn = false;
     }
 
     private void AcquireNextBounceTarget()
     {
+        // Find all enemies within bounce radius that haven't been hit
         var candidates = GameObject.FindGameObjectsWithTag("Enemy")
-            .Select(e => e.GetComponent<IDamageable>() is IDamageable dmg && !hitEnemies.Contains(dmg)
-                         ? e.transform
-                         : null)
-            .Where(t => t != null)
+            .Where(e =>
+            {
+                // Check if within bounce radius from last hit position
+                if (Vector2.Distance(lastHitPosition, e.transform.position) > bounceRadius)
+                    return false;
+
+                // Check if it has IDamageable component and hasn't been hit
+                var dmg = e.GetComponent<IDamageable>();
+                return dmg != null && !hitEnemies.Contains(dmg);
+            })
+            .Select(e => e.transform)
             .ToList();
 
         if (candidates.Count == 0)
         {
+            // No valid targets in bounce radius
             DestroyProjectile();
             return;
         }
 
+        // Choose the nearest valid target
         currentTarget = candidates
             .OrderBy(t => Vector2.Distance(lastHitPosition, t.position))
             .First();
@@ -88,10 +117,12 @@ public class ChainLightningDamage : MonoBehaviour
     {
         if (currentTarget == null)
         {
+            // Moving without target (initial spawn with no enemies)
             transform.position += (Vector3)(currentDirection * velocity * Time.deltaTime);
             return;
         }
 
+        // Check if target still exists
         if (currentTarget.gameObject == null)
         {
             if (bouncesRemaining > 0)
@@ -101,12 +132,14 @@ public class ChainLightningDamage : MonoBehaviour
             return;
         }
 
+        // Move towards target
         Vector2 pos2D = transform.position;
         Vector2 tgt2D = currentTarget.position;
         Vector2 dir = (tgt2D - pos2D).normalized;
         currentDirection = dir;
         transform.position += (Vector3)(dir * velocity * Time.deltaTime);
 
+        // Check for impact
         float dist = Vector2.Distance(transform.position, currentTarget.position);
         if (dist <= impactRadius)
             ProcessHitOn(currentTarget);
@@ -116,21 +149,30 @@ public class ChainLightningDamage : MonoBehaviour
     {
         IDamageable dmgable = targetT.GetComponent<IDamageable>();
         if (dmgable == null || hitEnemies.Contains(dmgable))
+        {
+            // Target is invalid, try to find another target or destroy
+            if (bouncesRemaining > 0)
+                AcquireNextBounceTarget();
+            else
+                DestroyProjectile();
             return;
+        }
 
         lastHitPosition = transform.position;
         hitEnemies.Add(dmgable);
 
+        // Deal damage
         bool isCrit = Random.value < criticalChance;
-        dmgable.ReceiveDamage(new DamageInfo
+        float dmg = dmgable.ReceiveDamage(new DamageInfo
         {
             Attacker = owner,
-            BaseAmount = damage,
+            BaseAmount = damage * 0.4f,
             IsCritical = isCrit
         });
-
+        StatsComponent.Get(owner).currentStats.health += dmg * StatsComponent.Get(owner).currentStats.lifeSteal;
         currentTarget = null;
 
+        // Look for next bounce target
         if (bouncesRemaining > 0)
         {
             bouncesRemaining--;

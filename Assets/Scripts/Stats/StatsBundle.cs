@@ -16,7 +16,6 @@ public struct StatsBundle
     public float maxHealth;
     [HideInInspector] public float health;
     public float regeneration;
-    public float shield;
 
     [Header("Extras")]
     public float armor;
@@ -35,7 +34,6 @@ public struct StatsBundle
             maxHealth = -stats.maxHealth,
             health = -stats.health,
             regeneration = -stats.regeneration,
-            shield = -stats.shield,
             armor = -stats.armor,
             criticalChance = -stats.criticalChance
         };
@@ -54,7 +52,6 @@ public struct StatsBundle
             maxHealth = a.maxHealth + b.maxHealth,
             health = a.health + b.health,
             regeneration = a.regeneration + b.regeneration,
-            shield = a.shield + b.shield,
             armor = a.armor + b.armor,
             criticalChance = a.criticalChance + b.criticalChance
         };
@@ -79,7 +76,6 @@ public struct StatsBundle
             maxHealth = stats.maxHealth * multiplier,
             health = stats.health * multiplier,
             regeneration = stats.regeneration * multiplier,
-            shield = stats.shield * multiplier,
             armor = stats.armor * multiplier,
             criticalChance = stats.criticalChance * multiplier
         };
@@ -99,7 +95,7 @@ public struct StatsBundle
     {
         return damage == 0 && lifeSteal == 0 && cooldownReduction == 0 &&
                moveSpeed == 0 && size == 0 && maxHealth == 0 &&
-               health == 0 && regeneration == 0 && shield == 0 &&
+               health == 0 && regeneration == 0 &&
                armor == 0 && criticalChance == 0;
     }
 }

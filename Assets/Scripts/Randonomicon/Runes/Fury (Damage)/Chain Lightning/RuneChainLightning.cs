@@ -3,7 +3,7 @@ using UnityEngine;
 public class RuneChainLightning : ActiveRuneStateBase
 {
     private readonly float detectionRadius = 5f;
-    public RuneChainLightning(RuneStateData runeStateData) : base(runeStateData, 0.3f)
+    public RuneChainLightning(RuneStateData runeStateData) : base(runeStateData, 0.2f)
     {
     }
 

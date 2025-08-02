@@ -46,7 +46,7 @@ public abstract class ActiveRuneStateBase : IRuneState
     {
         Vector3 playerPos = owner.transform.position;
 
-        Collider2D[] enemies = Physics2D.OverlapCircleAll(playerPos, 4f);
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(playerPos, 1f);
 
         for (int i = 0; i < enemies.Length; i++)
         {

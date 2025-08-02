@@ -57,12 +57,13 @@ public class ArcaneCircleDamage : MonoBehaviour
             if (enemy != null)
             {
                 bool isCritical = Random.Range(0f, 1f) < criticalChance;
-                enemy.ReceiveDamage(new DamageInfo
+                float dmg = enemy.ReceiveDamage(new DamageInfo
                 {
                     Attacker = owner,
                     BaseAmount = damage,
                     IsCritical = isCritical
                 });
+                StatsComponent.Get(owner).currentStats.health += dmg * StatsComponent.Get(owner).currentStats.lifeSteal;
             }
             else
             {

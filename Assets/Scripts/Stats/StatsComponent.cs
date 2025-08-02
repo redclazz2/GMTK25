@@ -6,7 +6,6 @@ public class StatsComponent : MonoBehaviour, IDamageable
 {
     [Tooltip("Estadísticas base sin modificaciones")]
     public StatsBundle baseStats;
-
     public StatsBundle currentStats;
 
     // Estados especiales manejados internamente
@@ -27,13 +26,17 @@ public class StatsComponent : MonoBehaviour, IDamageable
     void Update()
     {
         // Regeneración de vida
-        if (currentStats.regeneration > 0 && currentStats.health > 0 && !IsInvulnerable)
+        if (currentStats.regeneration > 0 && currentStats.health > 0)
         {
             currentStats.health = Mathf.Min(
                 currentStats.health + currentStats.regeneration * Time.deltaTime,
-                currentStats.maxHealth + currentStats.shield
+                currentStats.maxHealth
             );
         }
+
+        // Cap values to prevent exceeding limits
+        currentStats.health = Mathf.Clamp(currentStats.health, 0f, currentStats.maxHealth);
+        currentStats.criticalChance = Mathf.Clamp01(currentStats.criticalChance);
     }
 
     public void ResetToBase()
