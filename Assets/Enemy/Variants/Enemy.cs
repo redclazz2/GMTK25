@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
+    protected SpriteRenderer spriteRenderer;
     private Coroutine hitEffectCoroutine;
     private Vector3 originalScale;
     private Color originalColor;
@@ -61,8 +61,6 @@ public abstract class Enemy : MonoBehaviour
 
         UpdatePath();
     }
-
-    // Remove the UpdateOriginalScale method entirely
 
     void Hit()
     {
@@ -236,7 +234,7 @@ public abstract class Enemy : MonoBehaviour
         distanceToPlayer = lastDistanceToPlayer;
     }
 
-    void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         if (!showPathGizmos) return;
 

@@ -55,7 +55,7 @@ public class LaserEnemy : Enemy
         shootLine = new GameObject("ShootLaser").AddComponent<LineRenderer>();
 
         SetupLine(aimLine, new Color(1f, 1f, 0f, 0.5f), 0.05f);  // Yellow, translucent
-        SetupLine(shootLine, new Color(1f, 0.5f, 0.5f, 0.8f), 0.1f); // Light red
+        SetupLine(shootLine, new Color(1f, 0.5f, 0.6f, 0.8f), 0.1f); // Light red
     }
 
     void SetupLine(LineRenderer line, Color color, float width)
@@ -236,7 +236,7 @@ public class LaserEnemy : Enemy
                 if (Random.value < 0.2f) PickIdlePosition();
                 break;
             case LaserEnemyState.Charging:
-                stats.SetInvulnerable(true);
+                stats.SetInvulnerable(false);
                 break;
             case LaserEnemyState.Shooting:
                 stats.SetInvulnerable(false);
