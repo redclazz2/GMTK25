@@ -12,6 +12,10 @@ public static class RuneFactory
                 return new RuneFireball(data);
             case RuneType.ChainLightning:
                 return new RuneChainLightning(data);
+            case RuneType.FastFairy:
+                return new RuneFairy(data);
+            case RuneType.Swift:
+                return new RuneSwift(data);
             default:
                 Debug.LogError($"RuneFactory: tipo no reconocido {data.runeType}");
                 return null;

@@ -3,5 +3,8 @@ public enum RuneType
     // Fury (Damage Runes)
     ArcaneCircle,
     Fireball,
-    ChainLightning
+    ChainLightning,
+    // Zephyr (Mobility Runes)
+    FastFairy,
+    Swift
 }

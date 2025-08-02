@@ -7,7 +7,6 @@ public class StatsComponent : MonoBehaviour, IDamageable
     [Tooltip("Estadísticas base sin modificaciones")]
     public StatsBundle baseStats;
 
-    [HideInInspector]
     public StatsBundle currentStats;
 
     // Estados especiales manejados internamente
