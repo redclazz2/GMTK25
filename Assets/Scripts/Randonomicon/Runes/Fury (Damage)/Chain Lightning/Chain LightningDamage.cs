@@ -11,13 +11,12 @@ public class ChainLightningDamage : MonoBehaviour
     [SerializeField] private int maxBounces = 6;
     [SerializeField] private float impactRadius = 1f;
     [SerializeField] private float bounceRadius = 4f; // Radius to search for next bounce target
-    [SerializeField] private float maxLifetime = 2f; // Maximum lifetime to prevent stuck projectiles
+    [SerializeField] private float maxLifetime = 4f; // Maximum lifetime to prevent stuck projectiles
 
     private Transform currentTarget;
     private Vector2 currentDirection;
     private int bouncesRemaining;
     private readonly List<IDamageable> hitEnemies = new();
-    private bool isFirstSpawn = true;
     private float totalLifetime = 0f;
     private float noTargetTimer = 0f;
     private const float NO_TARGET_LIFETIME = 2f;
@@ -64,7 +63,6 @@ public class ChainLightningDamage : MonoBehaviour
         var enemies = GameObject.FindGameObjectsWithTag("Enemy");
         if (enemies.Length == 0)
         {
-            isFirstSpawn = true;
             currentDirection = Random.insideUnitCircle.normalized;
             currentTarget = null;
             return;
@@ -78,7 +76,6 @@ public class ChainLightningDamage : MonoBehaviour
 
         var choice = nearest3[Random.Range(0, nearest3.Length)];
         currentTarget = choice.transform;
-        isFirstSpawn = false;
     }
 
     private void AcquireNextBounceTarget()
