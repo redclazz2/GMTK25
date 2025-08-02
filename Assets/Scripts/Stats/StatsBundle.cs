@@ -14,7 +14,7 @@ public struct StatsBundle
 
     [Header("Survivability")]
     public float maxHealth;
-    [HideInInspector] public float health;
+    public float health;
     public float regeneration;
 
     [Header("Extras")]
