@@ -11,5 +11,7 @@ public enum RuneType
     // Chaos (Gameplay)
     GoldenWand,
     // Bulwark (Survivability)
-    Berserk
+    Berserk,
+    // Colossus (Size)
+    GiantSlayer
 }

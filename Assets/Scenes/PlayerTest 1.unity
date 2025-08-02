@@ -300,7 +300,7 @@ PrefabInstance:
     - target: {fileID: 8870889599078263960, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
       propertyPath: stateToTest
       value: 
-      objectReference: {fileID: 11400000, guid: e0ab23391aa7b2042b938ef6851bce8c, type: 2}
+      objectReference: {fileID: 11400000, guid: 4a7be729a6b2732419b8e2d009cafaaa, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
