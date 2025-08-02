@@ -6,9 +6,8 @@ public abstract class Enemy : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     private Coroutine hitEffectCoroutine;
-    private Vector3 originalScale; // Store the original scale once
-    private Color originalColor;   // Store the original color once
-
+    private Vector3 originalScale;
+    private Color originalColor;
     protected StatsComponent stats;
     protected Transform player;
     private List<Vector2> currentPath;
@@ -49,8 +48,7 @@ public abstract class Enemy : MonoBehaviour
         stats.OnHit += Hit;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
-        // Store original values once at start
+
         originalScale = transform.localScale;
         if (spriteRenderer != null)
         {
@@ -69,7 +67,6 @@ public abstract class Enemy : MonoBehaviour
         if (hitEffectCoroutine != null)
             StopCoroutine(hitEffectCoroutine);
 
-        // Always reset to original values before starting new effect
         transform.localScale = originalScale;
         if (spriteRenderer != null)
         {
@@ -103,10 +100,25 @@ public abstract class Enemy : MonoBehaviour
         hitEffectCoroutine = null;
     }
 
+    protected void FlipSprite()
+    {
+        if (player.position.x < transform.position.x)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
+    }
+
     protected virtual void Update()
     {
         if (player == null || stats == null)
             return;
+
+        FlipSprite();
+
 
         cachedPosition = transform.position;
         cachedMoveSpeed = stats.currentStats.moveSpeed;
@@ -137,7 +149,6 @@ public abstract class Enemy : MonoBehaviour
             FollowPath();
         }
     }
-
     void UpdatePath()
     {
         if (PathFinder.Instance == null) return;
@@ -220,12 +231,10 @@ public abstract class Enemy : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, newAngle);
         }*/
     }
-
     protected virtual void Die()
     {
         Destroy(gameObject);
     }
-
     public void GetPerformanceInfo(out float updateInterval, out float distanceToPlayer)
     {
         updateInterval = pathUpdateInterval;

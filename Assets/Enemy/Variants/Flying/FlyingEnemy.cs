@@ -7,6 +7,8 @@ public class FlyingEnemy : Enemy
         if (player == null || stats == null)
             return;
 
+        FlipSprite();
+
         MoveToPlayer();
     }
 

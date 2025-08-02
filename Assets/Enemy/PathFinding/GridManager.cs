@@ -6,7 +6,7 @@ public class GridManager : MonoBehaviour
     public Vector2Int gridSize = new Vector2Int(50, 50);
     public float cellSize = 1f;
     public LayerMask terrainMask;
-    
+
     [Header("Precision Settings")]
     [Tooltip("How to check if cells are walkable")]
     public WalkabilityCheckType checkType = WalkabilityCheckType.MultiplePoints;
@@ -17,7 +17,7 @@ public class GridManager : MonoBehaviour
     [Tooltip("Percentage of points that must be walkable for cell to be walkable")]
     [Range(0f, 1f)]
     public float walkableThreshold = 0.5f;
-    
+
     public Dictionary<Vector2Int, GridNode> nodes = new();
     private Vector2 GridOriginOffset => new Vector2(gridSize.x, gridSize.y) * cellSize * 0.5f;
 
@@ -43,7 +43,7 @@ public class GridManager : MonoBehaviour
             {
                 Vector2 worldPos = GridToWorld(new Vector2Int(x, y));
                 bool isWalkable = IsPositionWalkable(worldPos);
-                
+
                 nodes[new Vector2Int(x, y)] = new GridNode
                 {
                     position = new Vector2Int(x, y),
@@ -60,20 +60,27 @@ public class GridManager : MonoBehaviour
         {
             case WalkabilityCheckType.SinglePoint:
                 return !Physics2D.OverlapPoint(centerPos, terrainMask);
-                
+
             case WalkabilityCheckType.CircleCheck:
-                return !Physics2D.OverlapCircle(centerPos, checkRadius, terrainMask);
-                
+                ContactFilter2D filter = new ContactFilter2D();
+                filter.SetLayerMask(terrainMask);
+                filter.useTriggers = false;
+
+                Collider2D[] results = new Collider2D[1];
+                int hitCount = Physics2D.OverlapCircle(centerPos, checkRadius, filter, results);
+
+                return hitCount == 0;
+
             case WalkabilityCheckType.SquareCheck:
                 Vector2 boxSize = Vector2.one * (checkRadius * 2f);
                 return !Physics2D.OverlapBox(centerPos, boxSize, 0f, terrainMask);
-                
+
             case WalkabilityCheckType.MultiplePoints:
                 return CheckMultiplePoints(centerPos);
-                
+
             case WalkabilityCheckType.EdgeSampling:
                 return CheckEdgePoints(centerPos);
-                
+
             default:
                 return !Physics2D.OverlapCircle(centerPos, checkRadius, terrainMask);
         }
@@ -83,12 +90,12 @@ public class GridManager : MonoBehaviour
     {
         int walkablePoints = 0;
         int totalPoints = checksPerCell;
-        
+
         // Create a grid of points within the cell
         int pointsPerSide = Mathf.CeilToInt(Mathf.Sqrt(checksPerCell));
         float stepSize = (cellSize * 0.8f) / (pointsPerSide - 1); // 0.8f to stay within cell bounds
         Vector2 startOffset = Vector2.one * (cellSize * 0.4f); // Start from corner
-        
+
         for (int i = 0; i < pointsPerSide; i++)
         {
             for (int j = 0; j < pointsPerSide; j++)
@@ -98,14 +105,14 @@ public class GridManager : MonoBehaviour
                     // Early exit if impossible to reach threshold
                     return false;
                 }
-                
+
                 Vector2 checkPos = centerPos - startOffset + new Vector2(i * stepSize, j * stepSize);
-                
+
                 if (!Physics2D.OverlapPoint(checkPos, terrainMask))
                 {
                     walkablePoints++;
                 }
-                
+
                 // Early exit if we've already met the threshold
                 if (walkablePoints >= totalPoints * walkableThreshold)
                 {
@@ -113,7 +120,7 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
-        
+
         return (float)walkablePoints / totalPoints >= walkableThreshold;
     }
 
@@ -121,20 +128,20 @@ public class GridManager : MonoBehaviour
     {
         int walkablePoints = 0;
         int totalPoints = checksPerCell;
-        
+
         // Check points around the perimeter of the cell
         for (int i = 0; i < totalPoints; i++)
         {
             float angle = (float)i / totalPoints * 2f * Mathf.PI;
             Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * checkRadius;
             Vector2 checkPos = centerPos + offset;
-            
+
             if (!Physics2D.OverlapPoint(checkPos, terrainMask))
             {
                 walkablePoints++;
             }
         }
-        
+
         return (float)walkablePoints / totalPoints >= walkableThreshold;
     }
 
@@ -157,13 +164,13 @@ public class GridManager : MonoBehaviour
     void OnDrawGizmos()
     {
         if (gridSize.x <= 0 || gridSize.y <= 0 || nodes == null || nodes.Count == 0) return;
-        
+
         foreach (var node in nodes.Values)
         {
             // Color based on walkability
             Gizmos.color = node.walkable ? Color.gray : Color.red;
             Gizmos.DrawWireCube(node.worldPosition, Vector3.one * cellSize * 0.9f);
-            
+
             // Show check visualization for selected check type
             if (Application.isPlaying)
             {
@@ -179,24 +186,24 @@ public class GridManager : MonoBehaviour
     void DrawCheckVisualization(Vector2 centerPos)
     {
         Gizmos.color = new Color(0f, 1f, 1f, 0.3f);
-        
+
         switch (checkType)
         {
             case WalkabilityCheckType.CircleCheck:
                 Gizmos.DrawWireSphere(centerPos, checkRadius);
                 break;
-                
+
             case WalkabilityCheckType.SquareCheck:
                 Vector3 boxSize = Vector3.one * (checkRadius * 2f);
                 Gizmos.DrawWireCube(centerPos, boxSize);
                 break;
-                
+
             case WalkabilityCheckType.MultiplePoints:
                 // Draw the grid of check points
                 int pointsPerSide = Mathf.CeilToInt(Mathf.Sqrt(checksPerCell));
                 float stepSize = (cellSize * 0.8f) / (pointsPerSide - 1);
                 Vector2 startOffset = Vector2.one * (cellSize * 0.4f);
-                
+
                 for (int i = 0; i < pointsPerSide; i++)
                 {
                     for (int j = 0; j < pointsPerSide; j++)
@@ -206,7 +213,7 @@ public class GridManager : MonoBehaviour
                     }
                 }
                 break;
-                
+
             case WalkabilityCheckType.EdgeSampling:
                 // Draw points around the edge
                 for (int i = 0; i < checksPerCell; i++)
@@ -219,7 +226,7 @@ public class GridManager : MonoBehaviour
                 break;
         }
     }
-    
+
     // Utility method to regenerate grid at runtime
     [ContextMenu("Regenerate Grid")]
     public void RegenerateGrid()

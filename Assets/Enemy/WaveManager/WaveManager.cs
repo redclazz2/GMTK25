@@ -131,8 +131,8 @@ public class WaveManager : MonoBehaviour
         var prefab = list[Random.Range(0, list.Length)];
         var spawnPoint = currentZone.spawnPoints[Random.Range(0, currentZone.spawnPoints.Length)];
         
-        float radius = 3f;
-        float minDistance = 1f;
+        float radius = 1.5f;
+        float minDistance = 0.5f;
         float distance = Random.Range(minDistance, radius);
         Vector2 offset = Random.insideUnitCircle.normalized * distance;
         Vector3 spawnPos = spawnPoint.position + new Vector3(offset.x, offset.y, 0);

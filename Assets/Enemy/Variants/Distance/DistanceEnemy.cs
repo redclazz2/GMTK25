@@ -16,6 +16,8 @@ public class RangedEnemy : Enemy
         if (player == null || stats == null)
             return;
 
+        FlipSprite();
+
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         if (distanceToPlayer <= shootingRange)
