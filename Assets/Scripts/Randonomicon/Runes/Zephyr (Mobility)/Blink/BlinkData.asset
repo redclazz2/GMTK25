@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: baafd34741c1d654693fe7e67cfcf4d3, type: 3}
-  m_Name: SwiftData
+  m_Name: BlinkData
   m_EditorClassIdentifier: 
-  runeName: Swift
+  runeName: Blink
   icon: {fileID: 0}
-  description: Gain 50% movement speed and converts it into CDR for the player
-  runeType: 4
+  description: Swap places with an enemy and gain a shield afterwards
+  runeType: 5
   statDelta:
     damage: 0
     lifeSteal: 0

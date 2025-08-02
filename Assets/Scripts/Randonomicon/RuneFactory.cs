@@ -16,6 +16,8 @@ public static class RuneFactory
                 return new RuneFairy(data);
             case RuneType.Swift:
                 return new RuneSwift(data);
+            case RuneType.Blink:
+                return new RuneBlink(data);
             default:
                 Debug.LogError($"RuneFactory: tipo no reconocido {data.runeType}");
                 return null;

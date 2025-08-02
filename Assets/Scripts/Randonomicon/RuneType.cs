@@ -6,5 +6,6 @@ public enum RuneType
     ChainLightning,
     // Zephyr (Mobility Runes)
     FastFairy,
-    Swift
+    Swift,
+    Blink
 }
