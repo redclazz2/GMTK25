@@ -9,7 +9,6 @@ public class ArcaneCircleDamage : MonoBehaviour
     public float damage;
     [HideInInspector]
     public float criticalChance;
-    [HideInInspector]
     public float damageInterval = 1f;
 
     private readonly List<IDamageable> enemiesInRange = new();

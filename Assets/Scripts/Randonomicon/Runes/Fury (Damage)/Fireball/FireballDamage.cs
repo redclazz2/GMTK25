@@ -9,21 +9,18 @@ public class FireballDamage : MonoBehaviour
     public float damage;
     [HideInInspector]
     public float criticalChance;
-    [HideInInspector]
-    public float velocity = 2f;
-    [HideInInspector]
-    public float damageInterval = 1f;
-    [HideInInspector]
-    public float lifetime = 10f;
+    public float velocity = 4f;
+    public float damageInterval = 0.5f;
+    [SerializeField]
+    private float lifetime = 3f;
 
-    private Transform target;
-    private Vector2 currentDirection = Vector2.zero;
+    private Vector2 fixedDirection = Vector2.zero;
     private readonly Dictionary<IDamageable, float> enemyTimers = new();
     private float destroyTimer = 0f;
 
     void Start()
     {
-        FindRandomTarget();
+        SetDirectionToNearestEnemy();
         destroyTimer = lifetime;
     }
 
@@ -36,11 +33,11 @@ public class FireballDamage : MonoBehaviour
             return;
         }
 
-        MoveTowardsTarget();
+        MoveInFixedDirection();
         UpdateDamageTimers();
     }
 
-    void FindRandomTarget()
+    void SetDirectionToNearestEnemy()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
@@ -70,47 +67,21 @@ public class FireballDamage : MonoBehaviour
                 }
             }
 
-            // Pick random from nearest enemies
+            // Pick random from nearest enemies and set direction
             GameObject randomNearestEnemy = nearestEnemies[Random.Range(0, nearestEnemies.Count)];
-            target = randomNearestEnemy.transform;
+            fixedDirection = (randomNearestEnemy.transform.position - transform.position).normalized;
         }
         else
         {
             // No enemies found, move in random direction
-            currentDirection = Random.insideUnitCircle.normalized;
-            target = null;
+            fixedDirection = Random.insideUnitCircle.normalized;
         }
     }
 
-    void MoveTowardsTarget()
+    void MoveInFixedDirection()
     {
-        if (target == null)
-        {
-            // No target, continue in current direction
-            if (currentDirection == Vector2.zero)
-            {
-                FindRandomTarget();
-            }
-            else
-            {
-                transform.position += (Vector3)(currentDirection * velocity * Time.deltaTime);
-            }
-            return;
-        }
-
-        // Check if target still exists
-        if (target.gameObject == null)
-        {
-            FindRandomTarget();
-            return;
-        }
-
-        // Calculate direction to target
-        Vector2 direction = (target.position - transform.position).normalized;
-        currentDirection = direction;
-
-        // Move towards target
-        transform.position += (Vector3)(direction * velocity * Time.deltaTime);
+        // Always move in the fixed direction set at start
+        transform.position += (Vector3)(Time.deltaTime * velocity * fixedDirection);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -122,7 +93,7 @@ public class FireballDamage : MonoBehaviour
                 enemyTimers.Add(damageable, 0f);
             }
         }
-        else if(!other.CompareTag("Player"))
+        else if (!other.CompareTag("Player"))
         {
             DestroyFireball();
         }
@@ -181,14 +152,9 @@ public class FireballDamage : MonoBehaviour
         enemy.ReceiveDamage(new DamageInfo
         {
             Attacker = owner,
-            BaseAmount = damage,
+            BaseAmount = damage * 1.5f,
             IsCritical = isCritical
         });
-    }
-
-    private void OnBecameInvisible()
-    {
-        DestroyFireball();
     }
 
     void DestroyFireball()

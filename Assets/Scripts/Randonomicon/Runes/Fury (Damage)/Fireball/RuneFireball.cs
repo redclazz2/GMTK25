@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class RuneFireball : ActiveRuneStateBase
 {
-    private readonly float detectionRadius = 5f;
-
-    public RuneFireball(RuneStateData runeStateData) : base(runeStateData, 3)
+    public RuneFireball(RuneStateData runeStateData) : base(runeStateData, 4)
     {
     }
 
