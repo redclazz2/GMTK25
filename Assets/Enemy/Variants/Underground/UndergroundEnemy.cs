@@ -15,7 +15,8 @@ public class UndergroundEnemy : Enemy
     [Header("Direct Movement")]
     [Tooltip("Speed multiplier when moving directly (can be different from pathfinding speed)")]
     public float directMovementSpeedMultiplier = 1.2f;
-
+    private float pathfindingEnteredTime;
+    public float directModeCooldown = 2f;
     private bool isUsingPathfinding = false;
 
     protected override void Start()
@@ -33,6 +34,7 @@ public class UndergroundEnemy : Enemy
 
         spriteRenderer.enabled = true;
         spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+        stats.SetInvulnerable(true);
     }
 
     protected override void Update()
@@ -42,23 +44,24 @@ public class UndergroundEnemy : Enemy
 
         FlipSprite();
 
-        if (Time.time % 0.5f < Time.deltaTime)
+        if (Time.time % 0.5f < Time.deltaTime && spriteRenderer != null && spriteRenderer.color != Color.white)
         {
-            if (spriteRenderer != null)
-            {
-                if (spriteRenderer.color != Color.white)
-                {
-                    spriteRenderer.color = Color.white;
-                }
-            }
+            spriteRenderer.color = Color.white;
         }
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        bool shouldUsePathfinding = distanceToPlayer <= pathfindingRange;
+        bool wantsToUsePathfinding = distanceToPlayer <= pathfindingRange;
 
-        if (shouldUsePathfinding != isUsingPathfinding)
+        if (wantsToUsePathfinding && !isUsingPathfinding)
         {
-            SwitchMode(shouldUsePathfinding);
+            SwitchMode(true);
+        }
+        else if (!wantsToUsePathfinding && isUsingPathfinding)
+        {
+            if (Time.time - pathfindingEnteredTime >= directModeCooldown)
+            {
+                SwitchMode(false);
+            }
         }
 
         if (isUsingPathfinding)
@@ -75,6 +78,11 @@ public class UndergroundEnemy : Enemy
     {
         isUsingPathfinding = usePathfinding;
 
+        if (usePathfinding)
+        {
+            pathfindingEnteredTime = Time.time;
+        }
+
         if (spriteRenderer != null)
         {
             if (usePathfinding && pathfindingSprite != null)
@@ -88,7 +96,12 @@ public class UndergroundEnemy : Enemy
                 spriteRenderer.sprite = directMovementSprite;
             }
         }
+
+        int enemyLayer = gameObject.layer;
+        int terrainLayer = LayerMask.NameToLayer("Terrain");
+        Physics2D.IgnoreLayerCollision(enemyLayer, terrainLayer, !usePathfinding);
     }
+
 
     private void MoveDirectlyToPlayer()
     {
