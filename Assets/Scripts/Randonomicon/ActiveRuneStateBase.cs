@@ -22,6 +22,9 @@ public abstract class ActiveRuneStateBase : IRuneState
 
     public virtual void Tick(float dt)
     {
+        // Check cooldown changes
+
+
         // Reduce cooldown
         if (_cooldownRemaining > 0f)
             _cooldownRemaining -= dt;
@@ -39,7 +42,22 @@ public abstract class ActiveRuneStateBase : IRuneState
         owner.GetComponent<StatsComponent>().ApplyModifiers(-_stateData.statDelta);
     }
 
-    protected abstract bool CanTrigger();
+    protected virtual bool CanTrigger()
+    {
+        Vector3 playerPos = owner.transform.position;
+
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(playerPos, 4f);
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i].CompareTag("Enemy"))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     protected abstract void OnTrigger();
 }

@@ -89,15 +89,4 @@ public class StatsComponent : MonoBehaviour, IDamageable
         float damageReduction = currentStats.armor / (currentStats.armor + 100f);
         return baseDamage * (1f - damageReduction);
     }
-
-    [ContextMenu("Debug Current Stats")]
-    private void DebugCurrentStats()
-    {
-        Debug.Log($"Current Stats:\n" +
-                  $"Damage: {currentStats.damage}\n" +
-                  $"Health: {currentStats.health}/{currentStats.maxHealth}\n" +
-                  $"Invulnerable: {IsInvulnerable}\n" +
-                  $"Move Speed: {currentStats.moveSpeed}\n" +
-                  $"Armor: {currentStats.armor}");
-    }
 }

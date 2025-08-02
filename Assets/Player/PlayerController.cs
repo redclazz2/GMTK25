@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerTest : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private StatsComponent statsComponent;
     private RuneComponent runes;
@@ -42,9 +42,8 @@ public class PlayerTest : MonoBehaviour
 
     private void Update()
     {
-        // Usamos directamente la estadística actual
         float speed = statsComponent.currentStats.moveSpeed;
-        Vector3 movement = new Vector3(moveInput.x, moveInput.y, 0f);
-        transform.position += movement * speed * Time.deltaTime;
+        Vector3 movement = new(moveInput.x, moveInput.y, 0f);
+        transform.position += speed * Time.deltaTime * movement;
     }
 }
