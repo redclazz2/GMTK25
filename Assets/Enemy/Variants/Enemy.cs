@@ -67,7 +67,7 @@ public abstract class Enemy : MonoBehaviour
     void Hit()
     {
         if (hitEffectCoroutine != null)
-            StopCoroutine(hitEffectCoroutine);
+        StopCoroutine(hitEffectCoroutine);
 
         // Capture current scale when hit occurs
         originalScale = transform.localScale;
@@ -76,17 +76,16 @@ public abstract class Enemy : MonoBehaviour
         {
             spriteRenderer.color = originalColor;
         }
-
         hitEffectCoroutine = StartCoroutine(HitEffect());
     }
 
-    IEnumerator HitEffect(float duration = 0.1f, float scaleFactor = 1.15f)
+    IEnumerator HitEffect(float duration = 0.1f, float scaleFactor =1.15f)
     {
         if (spriteRenderer == null)
             yield break;
 
         Color hitColor = new(1f, 0.5f, 0.5f);
-
+        StatsComponent.Get(gameObject).SetCanModifySize(false);
         transform.localScale = new Vector3(originalScale.x * scaleFactor, originalScale.y * (2f - scaleFactor), originalScale.z);
         spriteRenderer.color = hitColor;
 
@@ -102,6 +101,7 @@ public abstract class Enemy : MonoBehaviour
         transform.localScale = originalScale;
         spriteRenderer.color = originalColor;
         hitEffectCoroutine = null;
+        StatsComponent.Get(gameObject).SetCanModifySize(true);
     }
 
     protected void FlipSprite()

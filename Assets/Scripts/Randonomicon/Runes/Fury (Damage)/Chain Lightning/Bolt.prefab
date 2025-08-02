@@ -105,6 +105,6 @@ MonoBehaviour:
   criticalChance: 0
   velocity: 5
   maxBounces: 6
-  impactRadius: 0.5
+  impactRadius: 1
   bounceRadius: 4
-  maxLifetime: 2
+  maxLifetime: 4
