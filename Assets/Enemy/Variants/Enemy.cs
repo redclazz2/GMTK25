@@ -49,7 +49,7 @@ public abstract class Enemy : MonoBehaviour
 
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        originalScale = transform.localScale;
+        // Don't store originalScale here anymore
         if (spriteRenderer != null)
         {
             originalColor = spriteRenderer.color;
@@ -62,12 +62,16 @@ public abstract class Enemy : MonoBehaviour
         UpdatePath();
     }
 
+    // Remove the UpdateOriginalScale method entirely
+
     void Hit()
     {
         if (hitEffectCoroutine != null)
             StopCoroutine(hitEffectCoroutine);
 
-        transform.localScale = originalScale;
+        // Capture current scale when hit occurs
+        originalScale = transform.localScale;
+
         if (spriteRenderer != null)
         {
             spriteRenderer.color = originalColor;
@@ -119,7 +123,6 @@ public abstract class Enemy : MonoBehaviour
 
         FlipSprite();
 
-
         cachedPosition = transform.position;
         cachedMoveSpeed = stats.currentStats.moveSpeed;
 
@@ -149,6 +152,7 @@ public abstract class Enemy : MonoBehaviour
             FollowPath();
         }
     }
+
     void UpdatePath()
     {
         if (PathFinder.Instance == null) return;
@@ -219,22 +223,13 @@ public abstract class Enemy : MonoBehaviour
         float moveDistance = cachedMoveSpeed * Time.deltaTime;
         Vector2 newPosition = cachedPosition + moveDirection * moveDistance;
         transform.position = newPosition;
-
-        /*if (smoothRotation && moveDirection.sqrMagnitude > 0.01f)
-        {
-            float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-            float currentAngle = transform.eulerAngles.z;
-            float angleDiff = Mathf.DeltaAngle(currentAngle, targetAngle);
-            float rotationStep = rotationSpeed * Time.deltaTime;
-            angleDiff = Mathf.Clamp(angleDiff, -rotationStep, rotationStep);
-            float newAngle = currentAngle + angleDiff;
-            transform.rotation = Quaternion.Euler(0, 0, newAngle);
-        }*/
     }
+
     protected virtual void Die()
     {
         Destroy(gameObject);
     }
+
     public void GetPerformanceInfo(out float updateInterval, out float distanceToPlayer)
     {
         updateInterval = pathUpdateInterval;

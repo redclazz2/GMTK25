@@ -166,11 +166,10 @@ MonoBehaviour:
     lifeSteal: 0
     cooldownReduction: 0
     moveSpeed: 2
-    size: 0
+    size: 1
     maxHealth: 5
     health: 0
     regeneration: 0
-    shield: 0
     armor: 0
     criticalChance: 0
   currentStats:
@@ -182,7 +181,6 @@ MonoBehaviour:
     maxHealth: 0
     health: 0
     regeneration: 0
-    shield: 0
     armor: 0
     criticalChance: 0
 --- !u!58 &6634129000956410799

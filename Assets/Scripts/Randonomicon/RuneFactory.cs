@@ -21,7 +21,7 @@ public static class RuneFactory
             case RuneType.GoldenWand:
                 return new RuneGoldenWand(data);
             case RuneType.Berserk:
-                return new RuneBerserk(data);
+                //return new RuneBerserk(data);
             default:
                 Debug.LogError($"RuneFactory: tipo no reconocido {data.runeType}");
                 return null;
