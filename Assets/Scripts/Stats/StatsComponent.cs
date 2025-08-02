@@ -34,6 +34,12 @@ public class StatsComponent : MonoBehaviour, IDamageable
             );
         }
 
+        // Size update
+        if (gameObject.transform.localScale.x != currentStats.size || gameObject.transform.localScale.y != currentStats.size)
+        {
+            gameObject.transform.localScale = new Vector3(currentStats.size, currentStats.size, gameObject.transform.localScale.z);
+        }
+
         // Cap values to prevent exceeding limits
         currentStats.health = Mathf.Clamp(currentStats.health, 0f, currentStats.maxHealth);
         currentStats.criticalChance = Mathf.Clamp01(currentStats.criticalChance);
