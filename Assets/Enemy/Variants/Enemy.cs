@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
+    protected SpriteRenderer spriteRenderer;
     private Coroutine hitEffectCoroutine;
     private Vector3 originalScale;
     private Color originalColor;
@@ -62,12 +62,10 @@ public abstract class Enemy : MonoBehaviour
         UpdatePath();
     }
 
-    // Remove the UpdateOriginalScale method entirely
-
     void Hit()
     {
         if (hitEffectCoroutine != null)
-            StopCoroutine(hitEffectCoroutine);
+        StopCoroutine(hitEffectCoroutine);
 
         // Capture current scale when hit occurs
         originalScale = transform.localScale;
@@ -76,17 +74,16 @@ public abstract class Enemy : MonoBehaviour
         {
             spriteRenderer.color = originalColor;
         }
-
         hitEffectCoroutine = StartCoroutine(HitEffect());
     }
 
-    IEnumerator HitEffect(float duration = 0.1f, float scaleFactor = 1.15f)
+    IEnumerator HitEffect(float duration = 0.1f, float scaleFactor =1.15f)
     {
         if (spriteRenderer == null)
             yield break;
 
         Color hitColor = new(1f, 0.5f, 0.5f);
-
+        StatsComponent.Get(gameObject).SetCanModifySize(false);
         transform.localScale = new Vector3(originalScale.x * scaleFactor, originalScale.y * (2f - scaleFactor), originalScale.z);
         spriteRenderer.color = hitColor;
 
@@ -102,6 +99,7 @@ public abstract class Enemy : MonoBehaviour
         transform.localScale = originalScale;
         spriteRenderer.color = originalColor;
         hitEffectCoroutine = null;
+        StatsComponent.Get(gameObject).SetCanModifySize(true);
     }
 
     protected void FlipSprite()
@@ -236,7 +234,7 @@ public abstract class Enemy : MonoBehaviour
         distanceToPlayer = lastDistanceToPlayer;
     }
 
-    void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         if (!showPathGizmos) return;
 

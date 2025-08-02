@@ -10,9 +10,16 @@ public class StatsComponent : MonoBehaviour, IDamageable
 
     // Estados especiales manejados internamente
     private bool _isInvulnerable = false;
+    private bool _canModifySize = true;
 
     // Propiedades públicas para acceder a estados especiales
     public bool IsInvulnerable => _isInvulnerable;
+    public bool CanModifySize => _canModifySize;
+    public bool SetCanModifySize(bool canModify)
+    {
+        _canModifySize = canModify;
+        return _canModifySize;
+    }
 
     public event Action OnHit;
     public event Action OnPreDie;
@@ -35,9 +42,13 @@ public class StatsComponent : MonoBehaviour, IDamageable
         }
 
         // Size update
-        if (gameObject.transform.localScale.x != currentStats.size || gameObject.transform.localScale.y != currentStats.size)
+        if (CanModifySize)
         {
-            gameObject.transform.localScale = new Vector3(currentStats.size, currentStats.size, gameObject.transform.localScale.z);
+            if (gameObject.transform.localScale.x != currentStats.size || gameObject.transform.localScale.y != currentStats.size)
+            {
+
+                gameObject.transform.localScale = new Vector3(currentStats.size, currentStats.size, gameObject.transform.localScale.z);
+            }
         }
 
         // Cap values to prevent exceeding limits
