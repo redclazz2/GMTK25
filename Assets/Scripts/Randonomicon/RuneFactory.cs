@@ -29,6 +29,9 @@ public static class RuneFactory
             // Size
             case RuneType.GiantSlayer:
                 return new RuneGiantSlayer(data);
+            // Crowd Control
+            case RuneType.TargetPractice:
+                return new RuneTargetPractice(data);
             default:
                 Debug.LogError($"RuneFactory: tipo no reconocido {data.runeType}");
                 return null;

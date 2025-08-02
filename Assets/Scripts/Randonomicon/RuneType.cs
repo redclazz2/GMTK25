@@ -13,5 +13,7 @@ public enum RuneType
     // Bulwark (Survivability)
     Berserk,
     // Colossus (Size)
-    GiantSlayer
+    GiantSlayer,
+    // Chains (Crowd Control)
+    TargetPractice
 }
