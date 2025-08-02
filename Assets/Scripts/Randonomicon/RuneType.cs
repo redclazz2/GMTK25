@@ -7,5 +7,9 @@ public enum RuneType
     // Zephyr (Mobility Runes)
     FastFairy,
     Swift,
-    Blink
+    Blink,
+    // Chaos (Gameplay)
+    GoldenWand,
+    // Bulwark (Survivability)
+    Berserk
 }

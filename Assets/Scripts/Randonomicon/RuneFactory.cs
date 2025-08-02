@@ -18,6 +18,10 @@ public static class RuneFactory
                 return new RuneSwift(data);
             case RuneType.Blink:
                 return new RuneBlink(data);
+            case RuneType.GoldenWand:
+                return new RuneGoldenWand(data);
+            case RuneType.Berserk:
+                return new RuneBerserk(data);
             default:
                 Debug.LogError($"RuneFactory: tipo no reconocido {data.runeType}");
                 return null;
