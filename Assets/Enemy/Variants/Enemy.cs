@@ -1,20 +1,26 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
+    private SpriteRenderer spriteRenderer;
+    private Coroutine hitEffectCoroutine;
+    private Vector3 originalScale; // Store the original scale once
+    private Color originalColor;   // Store the original color once
+
     protected StatsComponent stats;
     protected Transform player;
     private List<Vector2> currentPath;
     private int pathIndex;
     private float pathUpdateTimer = 0f;
-    
+
     [Header("Movement")]
     public float waypointReachDistance = 0.2f;
     public float rotationSpeed = 10f;
     public bool smoothRotation = true;
     public bool predictiveMovement = true;
-    
+
     [Header("Performance")]
     [Tooltip("How often to update path (seconds). Higher = better performance")]
     public float pathUpdateInterval = 1f;
@@ -22,7 +28,7 @@ public abstract class Enemy : MonoBehaviour
     public float maxUpdateDistance = 10f;
     [Tooltip("Use less frequent updates when far from player")]
     public bool useDistanceBasedUpdates = false;
-    
+
     [Header("Debug")]
     public bool showDebugInfo = false;
     public bool showPathGizmos = true;
@@ -31,7 +37,7 @@ public abstract class Enemy : MonoBehaviour
     private Vector2 cachedPosition;
     private float cachedMoveSpeed;
     private bool hasValidPath;
-    
+
     private float baseUpdateInterval;
     private float lastDistanceToPlayer;
 
@@ -40,12 +46,61 @@ public abstract class Enemy : MonoBehaviour
         player = GameObject.FindWithTag("Player")?.transform;
         stats = StatsComponent.Get(gameObject);
         stats.OnDie += Die;
+        stats.OnHit += Hit;
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        
+        // Store original values once at start
+        originalScale = transform.localScale;
+        if (spriteRenderer != null)
+        {
+            originalColor = spriteRenderer.color;
+        }
 
         baseUpdateInterval = pathUpdateInterval;
         cachedPosition = transform.position;
         lastPlayerPosition = player != null ? (Vector2)player.position : Vector2.zero;
 
         UpdatePath();
+    }
+
+    void Hit()
+    {
+        if (hitEffectCoroutine != null)
+            StopCoroutine(hitEffectCoroutine);
+
+        // Always reset to original values before starting new effect
+        transform.localScale = originalScale;
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = originalColor;
+        }
+
+        hitEffectCoroutine = StartCoroutine(HitEffect());
+    }
+
+    IEnumerator HitEffect(float duration = 0.1f, float scaleFactor = 1.15f)
+    {
+        if (spriteRenderer == null)
+            yield break;
+
+        Color hitColor = new(1f, 0.5f, 0.5f);
+
+        transform.localScale = new Vector3(originalScale.x * scaleFactor, originalScale.y * (2f - scaleFactor), originalScale.z);
+        spriteRenderer.color = hitColor;
+
+        float timer = 0f;
+        while (timer < duration)
+        {
+            float t = timer / duration;
+            spriteRenderer.color = Color.Lerp(hitColor, originalColor, t);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = originalScale;
+        spriteRenderer.color = originalColor;
+        hitEffectCoroutine = null;
     }
 
     protected virtual void Update()
@@ -88,7 +143,7 @@ public abstract class Enemy : MonoBehaviour
         if (PathFinder.Instance == null) return;
 
         List<Vector2> newPath = PathFinder.Instance.GetPathFrom(cachedPosition);
-        
+
         if (newPath != null && newPath.Count > 0)
         {
             if (currentPath == null || PathSignificantlyChanged(newPath))
@@ -115,7 +170,7 @@ public abstract class Enemy : MonoBehaviour
             if (Vector2.Distance(currentPath[i], newPath[i]) > 0.5f)
                 return true;
         }
-        
+
         return false;
     }
 
@@ -154,7 +209,7 @@ public abstract class Enemy : MonoBehaviour
         Vector2 newPosition = cachedPosition + moveDirection * moveDistance;
         transform.position = newPosition;
 
-        if (smoothRotation && moveDirection.sqrMagnitude > 0.01f)
+        /*if (smoothRotation && moveDirection.sqrMagnitude > 0.01f)
         {
             float targetAngle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
             float currentAngle = transform.eulerAngles.z;
@@ -163,7 +218,7 @@ public abstract class Enemy : MonoBehaviour
             angleDiff = Mathf.Clamp(angleDiff, -rotationStep, rotationStep);
             float newAngle = currentAngle + angleDiff;
             transform.rotation = Quaternion.Euler(0, 0, newAngle);
-        }
+        }*/
     }
 
     protected virtual void Die()
@@ -180,7 +235,7 @@ public abstract class Enemy : MonoBehaviour
     void OnDrawGizmos()
     {
         if (!showPathGizmos) return;
-        
+
         Vector2 currentPos = transform.position;
 
         if (currentPath != null && currentPath.Count > 0)
@@ -236,7 +291,7 @@ public abstract class Enemy : MonoBehaviour
 
         if (smoothRotation)
         {
-            Vector2 facingDir = new Vector2(Mathf.Cos(transform.eulerAngles.z * Mathf.Deg2Rad), 
+            Vector2 facingDir = new Vector2(Mathf.Cos(transform.eulerAngles.z * Mathf.Deg2Rad),
                                             Mathf.Sin(transform.eulerAngles.z * Mathf.Deg2Rad));
             Gizmos.color = Color.white;
             Gizmos.DrawRay(currentPos, facingDir * 0.5f);
