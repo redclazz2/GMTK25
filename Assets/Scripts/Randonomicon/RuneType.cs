@@ -18,5 +18,6 @@ public enum RuneType
     // Colossus (Size)
     GiantSlayer,
     // Chains (Crowd Control)
-    TargetPractice
+    TargetPractice,
+    Transmute
 }

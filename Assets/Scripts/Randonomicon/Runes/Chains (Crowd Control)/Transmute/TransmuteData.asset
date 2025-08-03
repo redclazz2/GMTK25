@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: baafd34741c1d654693fe7e67cfcf4d3, type: 3}
-  m_Name: ChainLightningData
+  m_Name: TransmuteData
   m_EditorClassIdentifier: 
-  runeName: 
+  runeName: Transmute
   icon: {fileID: 0}
-  description: generates a thunderbolt that bounces off 6 enemies.
-  runeType: 2
+  description: every so often he transforms enemies into sheep.
+  runeType: 12
   statDelta:
     damage: 0
     lifeSteal: 0
@@ -28,8 +28,6 @@ MonoBehaviour:
     armor: 0
     criticalChance: 0
   prefabEntries:
-  - key: bolt01
-    prefab: {fileID: 4449619418460825679, guid: c5a18b8e3e8ff574eae2d5854ee3bbb7, type: 3}
-  audioEntries:
-  - key: a1
-    audioClip: {fileID: 8300000, guid: cb1582836d63a634e901006ff82cab12, type: 3}
+  - key: sheep01
+    prefab: {fileID: 4041750042802517883, guid: 6d40d778df857004481ce02870305594, type: 3}
+  audioEntries: []

@@ -36,6 +36,8 @@ public static class RuneFactory
             // Crowd Control
             case RuneType.TargetPractice:
                 return new RuneTargetPractice(data);
+            case RuneType.Transmute:
+                return new RuneTransmute(data);
             default:
                 Debug.LogError($"RuneFactory: tipo no reconocido {data.runeType}");
                 return null;
