@@ -11,7 +11,7 @@ public class RuneChainLightning : ActiveRuneStateBase
         Vector3 spawnPos = GameObject.FindGameObjectWithTag("CastPlayer").transform.position;
         Quaternion spawnRot = Quaternion.identity;
         GameObject runeInstance = GameObject.Instantiate(_stateData.GetPrefab("bolt01"), spawnPos, spawnRot);
-        MusicManager.Instance.PlayOneShot(_stateData.GetAudioClip("a1"), 0.7f);
+        MusicManager.Instance.PlayOneShot(_stateData.GetAudioClip("a1"), 1f);
         ChainLightningDamage fireball = runeInstance.GetComponent<ChainLightningDamage>();
         fireball.owner = owner;
         fireball.damage = (float)(StatsComponent.Get(owner).currentStats.damage * 0.3);
