@@ -11,11 +11,11 @@ public class WaveAnnouncerTextEffect : MonoBehaviour
     [SerializeField] private float characterRevealDelay = 0.08f;
     [SerializeField] private float fadeInDuration = 0.4f;
     [SerializeField] private float popInScale = 1.3f;
-    [SerializeField] private float wobbleDuration = 1.2f;
-    [SerializeField] private float wobbleStrength = 15f;
+    [SerializeField] private float wobbleDuration = 1.1f;
+    [SerializeField] private float wobbleStrength = 16f;
     [SerializeField] private float wobbleSpeed = 8f;
-    [SerializeField] private float rotationWobble = 5f;
-    [SerializeField] private float moveToTopDuration = 1f;
+    [SerializeField] private float rotationWobble = 6f;
+    [SerializeField] private float moveToTopDuration = 0.8f;
     [SerializeField] private AnimationCurve moveCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
     private string originalText;
@@ -93,16 +93,21 @@ public class WaveAnnouncerTextEffect : MonoBehaviour
 
     private IEnumerator PlayTextEffect()
     {
-        // Phase 1: Reveal characters one by one (they wobble as soon as they're visible)
-        StartCoroutine(WobbleText()); // Start wobbling immediately
+        Coroutine wobbleCoroutine = StartCoroutine(WobbleText()); // Keep a reference to stop later
+
+        // Phase 1: Reveal characters one by one
         yield return StartCoroutine(RevealCharacters());
 
-        // Phase 2: Continue wobbling for remaining time
-        yield return new WaitForSeconds(wobbleDuration - (textComponent.textInfo.characterCount * characterRevealDelay));
+        // No need to wait for wobbleDuration anymore — wobble runs in parallel
 
-        // Phase 3: Move to top center
+        // Phase 2: Move to top
         yield return StartCoroutine(MoveToTopCenter());
+
+        // Phase 3: Stop wobble before fadeout
+        if (wobbleCoroutine != null)
+            StopCoroutine(wobbleCoroutine);
     }
+
 
     private IEnumerator RevealCharacters()
     {
@@ -304,25 +309,55 @@ public class WaveAnnouncerTextEffect : MonoBehaviour
         transform.position = targetPosition;
         transform.localScale = targetScale;
 
-        // Wait 1 second before fading out
-        yield return new WaitForSeconds(1f);
+        // 🔹 New Step: Pop and hold
+        yield return StartCoroutine(PopAndHoldText(1.2f, 1.2f)); // 1.2x scale for 1.2 seconds
 
-        yield return StartCoroutine(FadeOutText(0.5f));
+        // 🔹 Final Step: Fade out while shrinking
+        yield return StartCoroutine(FadeOutAndShrinkText(0.5f));
+
+        // 🔹 Done
+        Destroy(gameObject);
+
     }
 
-    private IEnumerator FadeOutText(float duration)
+    private IEnumerator PopAndHoldText(float scaleFactor, float duration)
+    {
+        Vector3 originalScale = transform.localScale;
+        Vector3 targetScale = originalScale * scaleFactor;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < 0.15f) // quick pop-in
+        {
+            float t = elapsedTime / 0.15f;
+            transform.localScale = Vector3.Lerp(originalScale, targetScale, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = targetScale;
+
+        yield return new WaitForSeconds(duration); // hold at full scale
+    }
+
+    private IEnumerator FadeOutAndShrinkText(float duration)
     {
         float elapsedTime = 0f;
         textComponent.ForceMeshUpdate();
         TMP_TextInfo textInfo = textComponent.textInfo;
 
+        Vector3 startScale = transform.localScale;
+        Vector3 endScale = startScale * 0.5f;
+
         while (elapsedTime < duration)
         {
-            float t = 1f - (elapsedTime / duration);
+            float t = elapsedTime / duration;
+            float alpha = 1f - t;
+            transform.localScale = Vector3.Lerp(startScale, endScale, t);
+
             for (int i = 0; i < textInfo.characterCount; i++)
             {
                 if (textInfo.characterInfo[i].isVisible)
-                    SetCharacterAlpha(i, t);
+                    SetCharacterAlpha(i, alpha);
             }
 
             textComponent.UpdateVertexData();
@@ -330,15 +365,11 @@ public class WaveAnnouncerTextEffect : MonoBehaviour
             yield return null;
         }
 
-        // Fully invisible
         for (int i = 0; i < textInfo.characterCount; i++)
         {
             SetCharacterAlpha(i, 0f);
         }
         textComponent.UpdateVertexData();
-
-
-        Destroy(gameObject);
     }
 
     private void SetCharacterAlpha(int characterIndex, float alpha)

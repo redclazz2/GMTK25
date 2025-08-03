@@ -16,7 +16,7 @@ public class LaserEnemy : Enemy
     [SerializeField] private float shootingDuration = 1.5f;
     [SerializeField] private float aimPredictionStrength = 0.3f;
     [SerializeField] private LayerMask obstacleLayerMask = -1;
-    [SerializeField] private float laserMaxDistance = 20f;
+    [SerializeField] private float laserMaxDistance = 30f;
 
     public Animator animator;
 
@@ -57,8 +57,8 @@ public class LaserEnemy : Enemy
         aimLine = new GameObject("AimLaser").AddComponent<LineRenderer>();
         shootLine = new GameObject("ShootLaser").AddComponent<LineRenderer>();
 
-        SetupLine(aimLine, new Color(1f, 1f, 0f, 0.5f), 0.05f);  // Yellow, translucent
-        SetupLine(shootLine, new Color(1f, 0.5f, 0.6f, 0.8f), 0.1f); // Light red
+        SetupLine(aimLine, new Color(1f, 1f, 0f, 0.5f), 0.025f);  // Yellow, translucent
+        SetupLine(shootLine, new Color(0.88f, 0.608f, 0.271f, 1f), 0.08f); // Warm orange (#e19b45)
     }
 
     void SetupLine(LineRenderer line, Color color, float width)
@@ -74,7 +74,7 @@ public class LaserEnemy : Enemy
         if (tex != null)
         {
             laserMat.mainTexture = tex;
-            laserMat.mainTextureScale = new Vector2(100f, 0.5f);
+            laserMat.mainTextureScale = new Vector2(1f, 0.5f);
         }
 
         line.material = laserMat;

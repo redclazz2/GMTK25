@@ -77,7 +77,7 @@ public abstract class Enemy : MonoBehaviour
         hitEffectCoroutine = StartCoroutine(HitEffect());
     }
 
-    IEnumerator HitEffect(float duration = 0.1f, float scaleFactor =1.15f)
+    IEnumerator HitEffect(float duration = 0.1f, float scaleFactor =1.25f)
     {
         if (spriteRenderer == null)
             yield break;
