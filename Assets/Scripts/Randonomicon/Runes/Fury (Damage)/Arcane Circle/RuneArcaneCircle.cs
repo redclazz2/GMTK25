@@ -13,6 +13,7 @@ public class RuneArcaneCircle : PassiveRuneStateBase
     {
         base.Enter(owner);
         runeInstance = GameObject.Instantiate(_stateData.GetPrefab("circle01"), owner.transform);
+        MusicManager.Instance.PlayOneShot(_stateData.GetAudioClip("a1"));
         runeInstance.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         arcaneCircleComponent = runeInstance.GetComponent<ArcaneCircleDamage>();
         arcaneCircleComponent.owner = owner;

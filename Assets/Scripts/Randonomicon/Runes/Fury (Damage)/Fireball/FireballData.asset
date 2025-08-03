@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runeName: Fireball
   icon: {fileID: 0}
-  description: 
+  description: Generates a fireball in a continuous direction.
   runeType: 1
   statDelta:
     damage: 0
@@ -25,9 +25,11 @@ MonoBehaviour:
     maxHealth: 0
     health: 0
     regeneration: 0
-    shield: 0
     armor: 0
     criticalChance: 0
   prefabEntries:
   - key: fireball01
     prefab: {fileID: 4903677150166673072, guid: cd1405db8470a9043b8cffe77ae7d332, type: 3}
+  audioEntries:
+  - key: a1
+    audioClip: {fileID: 8300000, guid: e18c411025e05ea48b253d9f2c47709a, type: 3}

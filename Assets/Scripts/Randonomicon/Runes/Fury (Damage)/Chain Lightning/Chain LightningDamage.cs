@@ -65,6 +65,8 @@ public class ChainLightningDamage : MonoBehaviour
         {
             currentDirection = Random.insideUnitCircle.normalized;
             currentTarget = null;
+            // Set rotation for random direction
+            SetRotationToDirection(currentDirection);
             return;
         }
 
@@ -76,6 +78,13 @@ public class ChainLightningDamage : MonoBehaviour
 
         var choice = nearest3[Random.Range(0, nearest3.Length)];
         currentTarget = choice.transform;
+
+        // Set initial rotation towards target
+        if (currentTarget != null)
+        {
+            Vector2 directionToTarget = (currentTarget.position - transform.position).normalized;
+            SetRotationToDirection(directionToTarget);
+        }
     }
 
     private void AcquireNextBounceTarget()
@@ -108,6 +117,13 @@ public class ChainLightningDamage : MonoBehaviour
             .First();
 
         currentDirection = Vector2.zero;
+
+        // Set rotation towards new bounce target
+        if (currentTarget != null)
+        {
+            Vector2 directionToTarget = (currentTarget.position - (Vector3)lastHitPosition).normalized;
+            SetRotationToDirection(directionToTarget);
+        }
     }
 
     private void MoveTowardsTarget()
@@ -134,12 +150,28 @@ public class ChainLightningDamage : MonoBehaviour
         Vector2 tgt2D = currentTarget.position;
         Vector2 dir = (tgt2D - pos2D).normalized;
         currentDirection = dir;
+
+        // Update rotation to face current movement direction
+        SetRotationToDirection(dir);
+
         transform.position += (Vector3)(dir * velocity * Time.deltaTime);
 
         // Check for impact
         float dist = Vector2.Distance(transform.position, currentTarget.position);
         if (dist <= impactRadius)
             ProcessHitOn(currentTarget);
+    }
+
+    private void SetRotationToDirection(Vector2 direction)
+    {
+        if (direction != Vector2.zero)
+        {
+            // Calculate the angle in degrees
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            // Apply the rotation to the transform
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
     }
 
     private void ProcessHitOn(Transform targetT)

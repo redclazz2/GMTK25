@@ -25,9 +25,11 @@ MonoBehaviour:
     maxHealth: 0
     health: 0
     regeneration: 0
-    shield: 0
     armor: 0
     criticalChance: 0
   prefabEntries:
   - key: circle01
     prefab: {fileID: 2405015938036046012, guid: 71f7acea9588ed848a0f473c66261780, type: 3}
+  audioEntries:
+  - key: a1
+    audioClip: {fileID: 8300000, guid: dde17b0837b1dd04488af9ad19d13f61, type: 3}

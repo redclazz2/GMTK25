@@ -9,7 +9,7 @@ public class ArcaneCircleDamage : MonoBehaviour
     public float damage;
     [HideInInspector]
     public float criticalChance;
-    public float damageInterval = 1f;
+    public float damageInterval = 0.3f;
 
     private readonly List<IDamageable> enemiesInRange = new();
     private float damageTimer = 0f;
@@ -60,7 +60,7 @@ public class ArcaneCircleDamage : MonoBehaviour
                 float dmg = enemy.ReceiveDamage(new DamageInfo
                 {
                     Attacker = owner,
-                    BaseAmount = damage,
+                    BaseAmount = damage * 0.33f,
                     IsCritical = isCritical
                 });
                 StatsComponent.Get(owner).currentStats.health += dmg * StatsComponent.Get(owner).currentStats.lifeSteal;

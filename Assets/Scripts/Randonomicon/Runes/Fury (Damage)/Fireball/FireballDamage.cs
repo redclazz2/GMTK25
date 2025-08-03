@@ -22,6 +22,9 @@ public class FireballDamage : MonoBehaviour
     {
         SetDirectionToNearestEnemy();
         destroyTimer = lifetime;
+
+        // Set initial rotation to face the direction
+        SetRotationToDirection();
     }
 
     void Update()
@@ -78,6 +81,18 @@ public class FireballDamage : MonoBehaviour
         }
     }
 
+    void SetRotationToDirection()
+    {
+        if (fixedDirection != Vector2.zero)
+        {
+            // Calculate the angle in degrees
+            float angle = Mathf.Atan2(fixedDirection.y, fixedDirection.x) * Mathf.Rad2Deg;
+
+            // Apply the rotation to the transform
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+    }
+
     void MoveInFixedDirection()
     {
         // Always move in the fixed direction set at start
@@ -92,10 +107,6 @@ public class FireballDamage : MonoBehaviour
             {
                 enemyTimers.Add(damageable, 0f);
             }
-        }
-        else if (!other.CompareTag("Player"))
-        {
-            DestroyFireball();
         }
     }
 
