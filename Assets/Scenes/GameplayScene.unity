@@ -2557,7 +2557,7 @@ PrefabInstance:
       objectReference: {fileID: 1881998613}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: waveDuration
-      value: 60
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: waveAnnouncer
@@ -2573,11 +2573,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: enemiesPerBatch
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: enemySpawnDelay
-      value: 1.4
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: batchSpawnInterval
@@ -2586,6 +2586,10 @@ PrefabInstance:
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: intermissionDuration
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
+      propertyPath: minBatchSpawnInterval
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: spawnZones.Array.size
@@ -2634,6 +2638,26 @@ PrefabInstance:
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: spawnZones.Array.data[1].name
       value: South
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
+      propertyPath: difficultyCurve.m_Curve.Array.data[0].time
+      value: 0.00006866455
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
+      propertyPath: difficultyCurve.m_Curve.Array.data[0].value
+      value: 0.61691284
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
+      propertyPath: difficultyCurve.m_Curve.Array.data[1].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
+      propertyPath: difficultyCurve.m_Curve.Array.data[0].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
+      propertyPath: difficultyCurve.m_Curve.Array.data[1].outSlope
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: spawnZones.Array.data[0].spawnPoints.Array.size
