@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baafd34741c1d654693fe7e67cfcf4d3, type: 3}
   m_Name: tossACoinData
   m_EditorClassIdentifier: 
-  runeName: All or Nothing
+  runeName: Toss a Coin
   icon: {fileID: 0}
-  description: 
+  description: Every 15 seconds there is a chance to erase all enemies or duplicate
+    them visible on the screen.
   runeType: 7
   statDelta:
     damage: 0

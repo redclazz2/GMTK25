@@ -15,7 +15,7 @@ MonoBehaviour:
   runeName: Goliat
   icon: {fileID: 0}
   description: Increased health, size, damage, and critical hit chance
-  runeType: 7
+  runeType: 8
   statDelta:
     damage: 0
     lifeSteal: 0
