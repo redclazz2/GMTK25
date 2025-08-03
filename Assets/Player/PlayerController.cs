@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     private RuneComponent runes;
     private InputSystem_Actions controls;
     private Vector2 moveInput;
-    public RuneStateData stateToTest;
     public AudioClip backgroundMusic;
 
     public Animator animator;
@@ -24,8 +23,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         statsComponent = GetComponent<StatsComponent>();
-        runes = GetComponent<RuneComponent>();
-        runes.AddState(RuneFactory.Create(stateToTest));
 
         if (spriteRenderer == null)
         {

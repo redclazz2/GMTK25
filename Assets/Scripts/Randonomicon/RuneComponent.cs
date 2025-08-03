@@ -10,6 +10,7 @@ public class RuneComponent : MonoBehaviour
     private void Start()
     {
         _basicAttack = RuneFactory.Create(initialRune);
+        _basicAttack.Enter(gameObject);
     }
 
     void Update()
