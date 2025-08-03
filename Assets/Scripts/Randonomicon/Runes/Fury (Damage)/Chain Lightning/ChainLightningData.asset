@@ -25,9 +25,11 @@ MonoBehaviour:
     maxHealth: 0
     health: 0
     regeneration: 0
-    shield: 0
     armor: 0
     criticalChance: 0
   prefabEntries:
   - key: bolt01
     prefab: {fileID: 4449619418460825679, guid: c5a18b8e3e8ff574eae2d5854ee3bbb7, type: 3}
+  audioEntries:
+  - key: a1
+    audioClip: {fileID: 8300000, guid: 18db3dcc2d75d3a4bb7019d030585c1d, type: 3}
