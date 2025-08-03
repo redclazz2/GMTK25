@@ -10,6 +10,7 @@ public enum RuneType
     Blink,
     // Chaos (Gameplay)
     GoldenWand,
+    TossACoin,
     // Bulwark (Survivability)
     Berserk,
     // Colossus (Size)

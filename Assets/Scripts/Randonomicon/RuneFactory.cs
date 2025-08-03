@@ -23,6 +23,8 @@ public static class RuneFactory
             // Gameplay
             case RuneType.GoldenWand:
                 return new RuneGoldenWand(data);
+            case RuneType.TossACoin:
+                return new RuneTossACoin(data);
             // Survival
             case RuneType.Berserk:
                 return new RuneBerserk(data);
