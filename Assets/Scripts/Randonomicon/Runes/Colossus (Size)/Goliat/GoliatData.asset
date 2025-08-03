@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baafd34741c1d654693fe7e67cfcf4d3, type: 3}
   m_Name: GoliatData
   m_EditorClassIdentifier: 
-  runeName: 
+  runeName: Goliat
   icon: {fileID: 0}
-  description: 
-  runeType: 0
+  description: Increased health, size, damage, and critical hit chance
+  runeType: 7
   statDelta:
     damage: 0
     lifeSteal: 0
