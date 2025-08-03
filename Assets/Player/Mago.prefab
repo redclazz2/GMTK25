@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5044667007160418949}
   - component: {fileID: 8822111449772370278}
   - component: {fileID: 1065967160756183491}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mago
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -107,7 +107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f8f217f483ac0c8a54c89ebfe164c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateToTest: {fileID: 11400000, guid: 215515291833d1f4d866cc56f90bbf59, type: 2}
   backgroundMusic: {fileID: 8300000, guid: e1ce37a3e445d9845bfbe8e33c23d58e, type: 3}
   animator: {fileID: 1065967160756183491}
   spriteRenderer: {fileID: 7368452309457607260}
@@ -133,7 +132,7 @@ MonoBehaviour:
     size: 1
     maxHealth: 100
     health: 0
-    regeneration: 0
+    regeneration: 1
     armor: 0
     criticalChance: 0
   currentStats:

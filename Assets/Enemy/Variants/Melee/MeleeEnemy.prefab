@@ -104,6 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f87f0e8de8619fdcf8f81eee277428e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCooldown: 1
+  attackRadius: 0.5
   waypointReachDistance: 0.2
   rotationSpeed: 10
   smoothRotation: 1
@@ -189,7 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseStats:
-    damage: 0
+    damage: 5
     lifeSteal: 0
     cooldownReduction: 0
     moveSpeed: 1.1

@@ -30,7 +30,6 @@ public class LaserEnemy : Enemy
     private LineRenderer aimLine;
     private LineRenderer shootLine;
 
-    private float laserDamage = 25f;
     private float damageInterval = 0.1f;
     private float lastDamageTime = 0f;
 
@@ -206,13 +205,17 @@ public class LaserEnemy : Enemy
     {
         if (Time.time - lastDamageTime < damageInterval) return;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, frozenAimDirection, laserMaxDistance);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, frozenAimDirection, laserMaxDistance, LayerMask.GetMask("Player"));
         if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
             StatsComponent playerStats = hit.collider.GetComponent<StatsComponent>();
             if (playerStats != null)
             {
-                playerStats.ReceiveDamage(new DamageInfo { BaseAmount = laserDamage });
+                playerStats.ReceiveDamage(new DamageInfo
+                {
+                    Attacker = gameObject,
+                    BaseAmount = StatsComponent.Get(gameObject).currentStats.damage
+                });
                 lastDamageTime = Time.time;
             }
         }
@@ -236,7 +239,7 @@ public class LaserEnemy : Enemy
         switch (newState)
         {
             case LaserEnemyState.Cooldown:
-            animator.SetBool("IsShooting", false);
+                animator.SetBool("IsShooting", false);
                 stats.SetInvulnerable(true);
                 if (Random.value < 0.2f) PickIdlePosition();
                 break;

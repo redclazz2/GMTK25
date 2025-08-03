@@ -3,7 +3,7 @@ using UnityEngine;
 public class DistanceEnemyProjectile : MonoBehaviour
 {
     public float lifetime = 5f;
-    public int damage = 1;
+    public int damage = 5;
 
     private void Start()
     {
@@ -15,7 +15,7 @@ public class DistanceEnemyProjectile : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             // Deal damage
-
+            StatsComponent.Get(collision.gameObject).ApplyModifiers(new StatsBundle { health = -damage });
             Destroy(gameObject);
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Terrain"))

@@ -49,6 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2752bdf1e7113cd47b198f679c19b2cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCooldown: 1
+  attackRadius: 0.5
   waypointReachDistance: 0.2
   rotationSpeed: 10
   smoothRotation: 1
@@ -67,6 +69,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   laserMaxDistance: 20
+  animator: {fileID: 0}
   laserTexture: {fileID: 2800000, guid: 52430f37a5e5e3b4eb62243b55648252, type: 3}
 --- !u!212 &-357827708586920853
 SpriteRenderer:
@@ -163,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseStats:
-    damage: 1
+    damage: 5
     lifeSteal: 0
     cooldownReduction: 0
     moveSpeed: 2

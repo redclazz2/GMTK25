@@ -14,6 +14,13 @@ public abstract class Enemy : MonoBehaviour
     private int pathIndex;
     private float pathUpdateTimer = 0f;
 
+    [Header("Attack")]
+    [Tooltip("Time in seconds between attacks")]
+    public float attackCooldown = 1f;
+    [Tooltip("Attack range radius")]
+    public float attackRadius = 0.5f;
+    private float lastAttackTime = -1f;
+
     [Header("Movement")]
     public float waypointReachDistance = 0.2f;
     public float rotationSpeed = 10f;
@@ -65,7 +72,7 @@ public abstract class Enemy : MonoBehaviour
     void Hit()
     {
         if (hitEffectCoroutine != null)
-        StopCoroutine(hitEffectCoroutine);
+            StopCoroutine(hitEffectCoroutine);
 
         // Capture current scale when hit occurs
         originalScale = transform.localScale;
@@ -77,7 +84,7 @@ public abstract class Enemy : MonoBehaviour
         hitEffectCoroutine = StartCoroutine(HitEffect());
     }
 
-    IEnumerator HitEffect(float duration = 0.1f, float scaleFactor =1.25f)
+    IEnumerator HitEffect(float duration = 0.1f, float scaleFactor = 1.25f)
     {
         if (spriteRenderer == null)
             yield break;
@@ -148,6 +155,35 @@ public abstract class Enemy : MonoBehaviour
         if (hasValidPath)
         {
             FollowPath();
+        }
+
+        // Check for player in attack range using Physics2D.OverlapCircle
+        CheckForPlayerInRange();
+    }
+
+    void CheckForPlayerInRange()
+    {
+        // Use Physics2D.OverlapCircle to detect player in attack range
+        Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, attackRadius, LayerMask.GetMask("Player"));
+
+        if (playerCollider != null && playerCollider.CompareTag("Player"))
+        {
+            // Check if we can attack (cooldown has passed)
+            if (Time.time >= lastAttackTime + attackCooldown)
+            {
+                // Attack the player
+                IDamageable player = playerCollider.gameObject.GetComponent<IDamageable>();
+                bool isCritical = Random.Range(0f, 1f) < stats.currentStats.criticalChance;
+                player.ReceiveDamage(new DamageInfo
+                {
+                    Attacker = gameObject,
+                    BaseAmount = stats.currentStats.damage,
+                    IsCritical = isCritical
+                });
+
+                // Set the last attack time to current time
+                lastAttackTime = Time.time;
+            }
         }
     }
 
@@ -221,6 +257,23 @@ public abstract class Enemy : MonoBehaviour
         float moveDistance = cachedMoveSpeed * Time.deltaTime;
         Vector2 newPosition = cachedPosition + moveDirection * moveDistance;
         transform.position = newPosition;
+    }
+
+    // Physics collision detection for attacking player
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            // Check if we can attack (cooldown has passed)
+            if (Time.time >= lastAttackTime + attackCooldown)
+            {
+                // TODO: Implement hit function to damage the player
+                // HitPlayer(other.gameObject);
+
+                // Set the last attack time to current time
+                lastAttackTime = Time.time;
+            }
+        }
     }
 
     protected virtual void Die()
@@ -304,5 +357,9 @@ public abstract class Enemy : MonoBehaviour
             Gizmos.color = new Color(1f, 1f, 0f, 0.1f);
             Gizmos.DrawWireSphere(currentPos, maxUpdateDistance);
         }
+
+        // Draw attack range
+        Gizmos.color = new Color(1f, 0f, 0f, 0.3f);
+        Gizmos.DrawWireSphere(currentPos, attackRadius);
     }
 }
