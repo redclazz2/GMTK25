@@ -171,7 +171,7 @@ MonoBehaviour:
     cooldownReduction: 0
     moveSpeed: 2
     size: 1
-    maxHealth: 5
+    maxHealth: 20
     health: 0
     regeneration: 0
     armor: 0
