@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1301980502128116371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2845048120276330558}
+  - component: {fileID: 1115583459759800856}
+  m_Layer: 0
+  m_Name: RuneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2845048120276330558
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301980502128116371}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.37984, y: -0.67701, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1115583459759800856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301980502128116371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb9389e9cc87e541a056af228444924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  furyRunes:
+  - {fileID: 11400000, guid: 2d9b722e4f49256488bec94ec53c1075, type: 2}
+  - {fileID: 11400000, guid: c5a2ee88cc999dc4eb4639899f02e42c, type: 2}
+  - {fileID: 11400000, guid: f0e39383857835a44a11fdf81d477e99, type: 2}
+  zephyrRunes:
+  - {fileID: 11400000, guid: a4a60ed4689091040a4379bd9ac3f612, type: 2}
+  - {fileID: 11400000, guid: 75f36dbb2b52c4b44bbf117174ba661d, type: 2}
+  - {fileID: 11400000, guid: 43504368841b5124182e406653c621b1, type: 2}
+  chaosRunes:
+  - {fileID: 11400000, guid: 744abb2533468cb42a77d6a9ae3f4820, type: 2}
+  - {fileID: 11400000, guid: ef0bf52b428d6324bbdb7c75c894d343, type: 2}
+  bulwarkRunes:
+  - {fileID: 11400000, guid: e0ab23391aa7b2042b938ef6851bce8c, type: 2}
+  colossusRunes:
+  - {fileID: 11400000, guid: 4a7be729a6b2732419b8e2d009cafaaa, type: 2}
+  - {fileID: 11400000, guid: e11cc0dd7c9cff543a0fc1e6d5f43d34, type: 2}
+  chainsRunes:
+  - {fileID: 11400000, guid: 8c779e4b33b92364f9e4714e2411456f, type: 2}
+  chaosExtraRunes: []
+  runeChaos: 0
