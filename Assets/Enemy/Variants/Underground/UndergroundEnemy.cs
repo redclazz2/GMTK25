@@ -98,7 +98,7 @@ public class UndergroundEnemy : Enemy
         }
 
         int enemyLayer = gameObject.layer;
-        int terrainLayer = LayerMask.NameToLayer("Terrain");
+        int terrainLayer = LayerMask.NameToLayer("Shadows");
         Physics2D.IgnoreLayerCollision(enemyLayer, terrainLayer, !usePathfinding);
     }
 

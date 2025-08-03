@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public enum SpawnMode
@@ -12,6 +13,9 @@ public class WaveManager : MonoBehaviour
     public SpawnZone[] spawnZones;
     public GameObject[] ambientEnemies;
     public GameObject[] waveEnemies;
+
+    public Canvas canvas;
+    public GameObject waveAnnouncer;
     
     // Wave configuration
     public float waveDuration = 20f;
@@ -30,10 +34,11 @@ public class WaveManager : MonoBehaviour
     private SpawnZone currentZone;
     
     private Coroutine spawnBatchCoroutine; // Track the coroutine
-    
+
     void Start()
     {
         PickNewSpawnZone();
+        AnnounceWave(currentWave, "Get Ready!");
     }
     
     void Update()
@@ -86,7 +91,22 @@ public class WaveManager : MonoBehaviour
         waveTimer = 0f;
         batchTimer = 0f;
         PickNewSpawnZone();
+        AnnounceWave(currentWave);
         Debug.Log("Wave " + currentWave + " starting at " + currentZone.name);
+    }
+
+    public void AnnounceWave(int waveNumber, string text = "")
+    {
+        GameObject instance = Instantiate(waveAnnouncer, canvas.transform);
+        instance.transform.localPosition = Vector3.zero;
+
+        var textEffect = instance.GetComponent<WaveAnnouncerTextEffect>();
+        if (textEffect != null)
+        {
+            var tmp = instance.GetComponent<TMP_Text>();
+            if (tmp != null)
+                tmp.text =  text == "" ? $"Wave {waveNumber}" : text;
+        }
     }
     
     void EndWave()
@@ -100,6 +120,8 @@ public class WaveManager : MonoBehaviour
             StopCoroutine(spawnBatchCoroutine);
             spawnBatchCoroutine = null;
         }
+
+        AnnounceWave(0,"WAVE END!");
         
         Debug.Log("Wave ended");
     }
