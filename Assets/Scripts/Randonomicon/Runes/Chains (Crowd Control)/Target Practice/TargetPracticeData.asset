@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TargetPracticeData
   m_EditorClassIdentifier: 
   runeName: Target Practice
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: c7965e06920752945b5bd6d58773bcdf, type: 3}
   description: Spawns a wall that distracts enemies.
   runeType: 11
   statDelta:

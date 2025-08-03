@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GoliatData
   m_EditorClassIdentifier: 
   runeName: Goliat
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b132c6394bbfcc14a938284649cfd275, type: 3}
   description: Increased health, size, damage, and critical hit chance
   runeType: 8
   statDelta:
@@ -28,3 +28,4 @@ MonoBehaviour:
     armor: 0
     criticalChance: 0
   prefabEntries: []
+  audioEntries: []

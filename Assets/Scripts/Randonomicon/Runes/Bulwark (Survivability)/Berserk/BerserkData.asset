@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BerserkData
   m_EditorClassIdentifier: 
   runeName: Berserk
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: bb494ff3a0229c84ab5b2ab8eeef8448, type: 3}
   description: Gain life steal proportional to its current missing health
   runeType: 9
   statDelta:

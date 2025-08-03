@@ -9,7 +9,6 @@ public class RuneUIManager : MonoBehaviour
     public TextMeshProUGUI titleText;
     public TextMeshProUGUI descriptionText;
     public Image iconImage;
-    public CanvasGroup canvasGroup;
 
     [SerializeField] private float fadeDuration = 0.5f;
 
@@ -19,17 +18,16 @@ public class RuneUIManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        if (canvasGroup != null)
-        {
-            canvasGroup.alpha = 0f;
-        }
+        SetAlpha(titleText, 0f);
+        SetAlpha(descriptionText, 0f);
+        SetAlpha(iconImage, 0f);
     }
 
-    public static void StartDisplayingRunes(List<RuneStateData> runes, float offsetTime)
+    public static void StartDisplayingRunes(RuneStateData[] runes, float offsetTime)
     {
         if (instance == null)
         {
-            Debug.LogWarning("RuneUIManager instance not found.");
+            Debug.LogWarning("RuneUIManager instance not found in the scene.");
             return;
         }
 
@@ -41,45 +39,68 @@ public class RuneUIManager : MonoBehaviour
         instance.displayCoroutine = instance.StartCoroutine(instance.DisplayRunes(runes, offsetTime));
     }
 
-    private IEnumerator DisplayRunes(List<RuneStateData> runes, float offsetTime)
+    private IEnumerator DisplayRunes(RuneStateData[] runes, float offsetTime)
     {
         foreach (var rune in runes)
         {
-            // Set UI data
-            if (iconImage != null) iconImage.sprite = rune.icon;
-            if (titleText != null) titleText.text = rune.name;
-            if (descriptionText != null) descriptionText.text = rune.description;
+            // Apply rune data
+            titleText.text = rune.runeName;
+            descriptionText.text = rune.description;
+            iconImage.sprite = rune.icon;
 
-            // Fade In
-            yield return StartCoroutine(FadeCanvasGroup(0f, 1f, fadeDuration));
+            // Simultaneous fade in
+            yield return StartCoroutine(FadeAll(0f, 1f));
 
-            // Stay visible for offsetTime seconds
+            // Display duration
             yield return new WaitForSeconds(offsetTime);
 
-            // Fade Out
-            yield return StartCoroutine(FadeCanvasGroup(1f, 0f, fadeDuration));
+            // Simultaneous fade out
+            yield return StartCoroutine(FadeAll(1f, 0f));
         }
 
-        // Optionally clear after all done
-        if (iconImage != null) iconImage.sprite = null;
-        if (titleText != null) titleText.text = "";
-        if (descriptionText != null) descriptionText.text = "";
+        // Optional cleanup
+        titleText.text = "";
+        descriptionText.text = "";
+        iconImage.sprite = null;
     }
 
-    private IEnumerator FadeCanvasGroup(float from, float to, float duration)
+    private IEnumerator FadeAll(float from, float to)
     {
         float timer = 0f;
-        while (timer < duration)
+        Color tColor = titleText.color;
+        Color dColor = descriptionText.color;
+        Color iColor = iconImage.color;
+
+        while (timer < fadeDuration)
         {
-            float t = timer / duration;
-            if (canvasGroup != null)
-                canvasGroup.alpha = Mathf.Lerp(from, to, t);
+            float t = timer / fadeDuration;
+            float alpha = Mathf.Lerp(from, to, t);
+
+            tColor.a = alpha;
+            dColor.a = alpha;
+            iColor.a = alpha;
+
+            titleText.color = tColor;
+            descriptionText.color = dColor;
+            iconImage.color = iColor;
 
             timer += Time.deltaTime;
             yield return null;
         }
 
-        if (canvasGroup != null)
-            canvasGroup.alpha = to;
+        tColor.a = to;
+        dColor.a = to;
+        iColor.a = to;
+
+        titleText.color = tColor;
+        descriptionText.color = dColor;
+        iconImage.color = iColor;
+    }
+
+    private void SetAlpha(Graphic element, float alpha)
+    {
+        Color c = element.color;
+        c.a = alpha;
+        element.color = c;
     }
 }

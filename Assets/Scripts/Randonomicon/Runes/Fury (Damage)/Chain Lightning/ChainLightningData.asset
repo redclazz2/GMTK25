@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ChainLightningData
   m_EditorClassIdentifier: 
   runeName: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 6d283aa0be962da4fb626ec4fef52ab7, type: 3}
   description: generates a thunderbolt that bounces off 6 enemies.
   runeType: 2
   statDelta:

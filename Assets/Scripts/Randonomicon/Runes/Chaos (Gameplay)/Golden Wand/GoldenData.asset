@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GoldenData
   m_EditorClassIdentifier: 
   runeName: Golden Wand
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 7bc9ddc673ca3a94b80d0e5544fce7a2, type: 3}
   description: Increases all stats by 20% but also increases the damage received
   runeType: 6
   statDelta:
@@ -28,3 +28,4 @@ MonoBehaviour:
     armor: 0
     criticalChance: 0
   prefabEntries: []
+  audioEntries: []

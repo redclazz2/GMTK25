@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BlinkData
   m_EditorClassIdentifier: 
   runeName: Blink
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 5fa33547e9ac731439fc818496a56fa9, type: 3}
   description: Swap places with an enemy and gain a shield afterwards
   runeType: 5
   statDelta:
@@ -25,7 +25,7 @@ MonoBehaviour:
     maxHealth: 0
     health: 0
     regeneration: 0
-    shield: 0
     armor: 0
     criticalChance: 0
   prefabEntries: []
+  audioEntries: []

@@ -99,16 +99,17 @@ public class WaveManager : MonoBehaviour
         batchTimer = 0f;
         PickNewSpawnZone();
 
-        float t = Mathf.Clamp01(currentWave / 20f); 
+        float t = Mathf.Clamp01(currentWave / 20f);
         float curveValue = difficultyCurve.Evaluate(t);
 
         enemiesPerBatch = Mathf.RoundToInt(Mathf.Lerp(1, maxEnemiesPerBatch, curveValue));
-        batchSpawnInterval = Mathf.Lerp(8f, minBatchSpawnInterval, curveValue); 
-        enemySpawnDelay = Mathf.Lerp(1.2f, minEnemySpawnDelay, curveValue); 
+        batchSpawnInterval = Mathf.Lerp(8f, minBatchSpawnInterval, curveValue);
+        enemySpawnDelay = Mathf.Lerp(1.2f, minEnemySpawnDelay, curveValue);
 
         AnnounceWave(currentWave);
         Debug.Log($"Wave {currentWave} starting at {currentZone.name} | Diff: {curveValue:F2}");
         RuneManager.RollNewRunes();
+        RuneUIManager.StartDisplayingRunes(RuneManager.GetAllCurrentRunes(), 5);
     }
 
 

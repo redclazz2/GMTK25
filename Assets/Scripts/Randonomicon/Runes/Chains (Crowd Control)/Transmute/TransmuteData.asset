@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TransmuteData
   m_EditorClassIdentifier: 
   runeName: Transmute
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: c7965e06920752945b5bd6d58773bcdf, type: 3}
   description: every so often he transforms enemies into sheep.
   runeType: 12
   statDelta:
