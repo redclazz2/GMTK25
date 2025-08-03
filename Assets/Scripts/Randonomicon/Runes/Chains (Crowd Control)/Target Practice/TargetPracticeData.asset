@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runeName: Target Practice
   icon: {fileID: 0}
-  description: Spawns a wall that distracts enemies
+  description: Spawns a wall that distracts enemies.
   runeType: 11
   statDelta:
     damage: 0
@@ -30,3 +30,4 @@ MonoBehaviour:
   prefabEntries:
   - key: wall01
     prefab: {fileID: 5906848314487388367, guid: c63a9fdb06734044d955434f1ba7f19d, type: 3}
+  audioEntries: []

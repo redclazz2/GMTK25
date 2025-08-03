@@ -16,5 +16,6 @@ public class RuneTargetPractice : ActiveRuneStateBase
 
         Quaternion spawnRot = Quaternion.identity;
         GameObject.Instantiate(_stateData.GetPrefab("wall01"), spawnPos, spawnRot);
+        MusicManager.Instance.PlayOneShot(_stateData.GetAudioClip("a1"), 1);
     }
 }

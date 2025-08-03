@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runeName: 
   icon: {fileID: 0}
-  description: 
+  description: generates a thunderbolt that bounces off 6 enemies.
   runeType: 2
   statDelta:
     damage: 0

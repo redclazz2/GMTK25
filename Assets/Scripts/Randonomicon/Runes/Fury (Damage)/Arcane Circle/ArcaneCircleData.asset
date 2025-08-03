@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runeName: Arcane Circle
   icon: {fileID: 0}
-  description: 
+  description: Spawns a circle around the player that deals damage in the area.
   runeType: 0
   statDelta:
     damage: 0
