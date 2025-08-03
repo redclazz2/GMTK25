@@ -1,5 +1,6 @@
 public enum RuneType
 {
+
     // Fury (Damage Runes)
     ArcaneCircle,
     Fireball,
@@ -19,5 +20,7 @@ public enum RuneType
     GiantSlayer,
     // Chains (Crowd Control)
     TargetPractice,
-    Transmute
+    Transmute,
+    // Basic
+    BasicAttack01,
 }

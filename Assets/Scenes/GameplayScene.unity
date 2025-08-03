@@ -1497,14 +1497,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 952283993522109840, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
-      propertyPath: m_Antialiasing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 952283993522109840, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2162438594335329970, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1549,49 +1541,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mago
       objectReference: {fileID: 0}
-    - target: {fileID: 7368452309457607260, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
-      propertyPath: m_Size.x
-      value: 0.58666664
-      objectReference: {fileID: 0}
-    - target: {fileID: 7368452309457607260, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
-      propertyPath: m_Size.y
-      value: 0.58666664
-      objectReference: {fileID: 0}
-    - target: {fileID: 7368452309457607260, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 273b5f353df1fda4f9ade05112455376, type: 3}
-    - target: {fileID: 7368452309457607260, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7368452309457607260, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8870889599078263960, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 2111596329}
     - target: {fileID: 8870889599078263960, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
       propertyPath: stateToTest
       value: 
-      objectReference: {fileID: 11400000, guid: c5a2ee88cc999dc4eb4639899f02e42c, type: 2}
-    - target: {fileID: 8870889599078263960, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
-      propertyPath: spriteRenderer
-      value: 
-      objectReference: {fileID: 2111596328}
-    - target: {fileID: 8870889599078263960, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
-      propertyPath: backgroundMusic
-      value: 
-      objectReference: {fileID: 8300000, guid: e1ce37a3e445d9845bfbe8e33c23d58e, type: 3}
+      objectReference: {fileID: 11400000, guid: 215515291833d1f4d866cc56f90bbf59, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3774788754278507442, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2111596329}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
 --- !u!4 &1069813504 stripped
 Transform:
@@ -4448,38 +4405,6 @@ PolygonCollider2D:
       - {x: -0.3866667, y: -0.56333333}
       - {x: -0.37, y: -0.55333334}
   m_UseDelaunayMesh: 0
---- !u!1 &2111596322 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3774788754278507442, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
-  m_PrefabInstance: {fileID: 1069813503}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &2111596328 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 7368452309457607260, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
-  m_PrefabInstance: {fileID: 1069813503}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &2111596329
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2111596322}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f4532e1894548e547ae9f85cd17f42bf, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

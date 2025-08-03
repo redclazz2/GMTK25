@@ -38,6 +38,8 @@ public static class RuneFactory
                 return new RuneTargetPractice(data);
             case RuneType.Transmute:
                 return new RuneTransmute(data);
+            case RuneType.BasicAttack01:
+                return new RuneBasicAttack(data);
             default:
                 Debug.LogError($"RuneFactory: tipo no reconocido {data.runeType}");
                 return null;

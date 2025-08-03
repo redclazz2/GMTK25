@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: baafd34741c1d654693fe7e67cfcf4d3, type: 3}
-  m_Name: ChainLightningData
+  m_Name: BasicAttackData
   m_EditorClassIdentifier: 
-  runeName: 
+  runeName: Basic Attack
   icon: {fileID: 0}
-  description: generates a thunderbolt that bounces off 6 enemies.
-  runeType: 2
+  description: Basic attack.
+  runeType: 13
   statDelta:
     damage: 0
     lifeSteal: 0
@@ -28,8 +28,8 @@ MonoBehaviour:
     armor: 0
     criticalChance: 0
   prefabEntries:
-  - key: bolt01
-    prefab: {fileID: 4449619418460825679, guid: c5a18b8e3e8ff574eae2d5854ee3bbb7, type: 3}
+  - key: basic01
+    prefab: {fileID: 1877553319735355328, guid: 43a2cca206bfe4d4786207442aeb48df, type: 3}
   audioEntries:
   - key: a1
-    audioClip: {fileID: 8300000, guid: 34d941c31cc0b9f4f92c39a5f98487e6, type: 3}
+    audioClip: {fileID: 8300000, guid: 5a145fb43a6f2f6458b7a6fa124947b2, type: 3}
