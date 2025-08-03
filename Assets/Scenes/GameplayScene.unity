@@ -2919,11 +2919,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: enemySpawnDelay
-      value: 1.2
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: batchSpawnInterval
-      value: 4
+      value: 4.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
+      propertyPath: maxEnemiesPerBatch
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: intermissionDuration
@@ -2983,11 +2987,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: difficultyCurve.m_Curve.Array.data[0].time
-      value: 0.00006866455
+      value: 0.020900726
       objectReference: {fileID: 0}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: difficultyCurve.m_Curve.Array.data[0].value
-      value: 0.61691284
+      value: 0.5503235
       objectReference: {fileID: 0}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: difficultyCurve.m_Curve.Array.data[1].inSlope
