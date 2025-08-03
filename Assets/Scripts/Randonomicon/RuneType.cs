@@ -11,6 +11,8 @@ public enum RuneType
     // Chaos (Gameplay)
     GoldenWand,
     TossACoin,
+    // Colossus (Size)
+    Goliat,
     // Bulwark (Survivability)
     Berserk,
     // Colossus (Size)
