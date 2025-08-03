@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1747171041152423437}
   - component: {fileID: 6604087566413841601}
   - component: {fileID: -7181527986927228420}
+  - component: {fileID: 6351646777060993220}
   m_Layer: 0
   m_Name: ArcaneCirclePrefab
   m_TagString: Untagged
@@ -141,3 +142,30 @@ MonoBehaviour:
   damage: 0
   criticalChance: 0
   damageInterval: 1
+--- !u!50 &6351646777060993220
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2405015938036046012}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
