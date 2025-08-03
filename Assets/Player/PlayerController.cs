@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         statsComponent = GetComponent<StatsComponent>();
+        statsComponent.OnDie += MeDie;
 
         if (spriteRenderer == null)
         {
@@ -32,6 +34,10 @@ public class PlayerController : MonoBehaviour
                 Debug.LogWarning("SpriteRenderer not assigned or found on GameObject.");
             }
         }
+    }
+
+    private void MeDie() {
+        SceneManager.LoadScene("GameOver");
     }
 
     private void OnEnable()
