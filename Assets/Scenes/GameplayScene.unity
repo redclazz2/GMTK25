@@ -2092,7 +2092,7 @@ PrefabInstance:
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: 'waveEnemies.Array.data[5]'
       value: 
-      objectReference: {fileID: 8924046968067302632, guid: 46b39b6aeb5c26042968962340a8874c, type: 3}
+      objectReference: {fileID: 2039768172677150548, guid: fa32d7c310bc26a4aab630c4e8734c88, type: 3}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: 'ambientEnemies.Array.data[0]'
       value: 
