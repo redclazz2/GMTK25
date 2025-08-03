@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetLight: {fileID: 9222470915176730944}
-  targetIntensity: 1.7
+  targetIntensity: 2
   fadeDuration: 1
 --- !u!1 &8634607849693881040
 GameObject:
