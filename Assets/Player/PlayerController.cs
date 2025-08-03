@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour
     private InputSystem_Actions controls;
     private Vector2 moveInput;
     public RuneStateData stateToTest;
+    public AudioClip backgroundMusic;
 
     private void Awake()
     {
         controls = new InputSystem_Actions();
+        MusicManager.Instance.PlayLoop("bg1", backgroundMusic, 1);
     }
 
     private void Start()

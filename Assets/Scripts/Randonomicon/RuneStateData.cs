@@ -18,6 +18,9 @@ public class RuneStateData : ScriptableObject
     [Header("Prefabs necesarios")]
     public List<PrefabEntry> prefabEntries;
 
+    [Header("Audio Clips")]
+    public List<AudioEntry> audioEntries;
+
     [System.Serializable]
     public class PrefabEntry
     {
@@ -25,7 +28,16 @@ public class RuneStateData : ScriptableObject
         public GameObject prefab;
     }
 
+    [System.Serializable]
+    public class AudioEntry
+    {
+        public string key;
+        public AudioClip audioClip;
+    }
+
     private Dictionary<string, GameObject> _prefabDict;
+    private Dictionary<string, AudioClip> _audioDict;
+
     public GameObject GetPrefab(string key)
     {
         if (_prefabDict == null)
@@ -37,5 +49,18 @@ public class RuneStateData : ScriptableObject
         }
         _prefabDict.TryGetValue(key, out var p);
         return p;
+    }
+
+    public AudioClip GetAudioClip(string key)
+    {
+        if (_audioDict == null)
+        {
+            _audioDict = new Dictionary<string, AudioClip>();
+            foreach (var e in audioEntries)
+                if (!_audioDict.ContainsKey(e.key))
+                    _audioDict.Add(e.key, e.audioClip);
+        }
+        _audioDict.TryGetValue(key, out var clip);
+        return clip;
     }
 }

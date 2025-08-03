@@ -11,6 +11,7 @@ public class RuneFireball : ActiveRuneStateBase
         Vector3 spawnPos = GameObject.FindGameObjectWithTag("CastPlayer").transform.position;
         Quaternion spawnRot = Quaternion.identity;
         GameObject runeInstance = GameObject.Instantiate(_stateData.GetPrefab("fireball01"), spawnPos, spawnRot);
+        MusicManager.Instance.PlayOneShot(_stateData.GetAudioClip("a1"), 0.5f);
         FireballDamage fireball = runeInstance.GetComponent<FireballDamage>();
         fireball.owner = owner;
         fireball.damage = StatsComponent.Get(owner).currentStats.damage;

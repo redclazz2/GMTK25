@@ -15,7 +15,7 @@ MonoBehaviour:
   runeName: Target Practice
   icon: {fileID: 0}
   description: Spawns a wall that distracts enemies
-  runeType: 9
+  runeType: 11
   statDelta:
     damage: 0
     lifeSteal: 0

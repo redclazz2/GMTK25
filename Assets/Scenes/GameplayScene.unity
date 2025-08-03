@@ -1243,6 +1243,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RuneManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1301980502128116371, guid: dc7a5754451c3f1449d0e11f6b778675, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2845048120276330558, guid: dc7a5754451c3f1449d0e11f6b778675, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.02689
@@ -1548,7 +1552,7 @@ PrefabInstance:
     - target: {fileID: 8870889599078263960, guid: 4344eb0c9a6051553a236675da1b7419, type: 3}
       propertyPath: stateToTest
       value: 
-      objectReference: {fileID: 11400000, guid: c5a2ee88cc999dc4eb4639899f02e42c, type: 2}
+      objectReference: {fileID: 11400000, guid: f0e39383857835a44a11fdf81d477e99, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3917,6 +3921,50 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1885119836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1885119838}
+  - component: {fileID: 1885119837}
+  m_Layer: 0
+  m_Name: MusicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1885119837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885119836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aac98b8427069f43929ebb2c21989a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1885119838
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1885119836}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.60687, y: -0.32263, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2002671894
 GameObject:
   m_ObjectHideFlags: 0
@@ -4340,3 +4388,4 @@ SceneRoots:
   - {fileID: 1881998614}
   - {fileID: 1615007946}
   - {fileID: 943799085}
+  - {fileID: 1885119838}
