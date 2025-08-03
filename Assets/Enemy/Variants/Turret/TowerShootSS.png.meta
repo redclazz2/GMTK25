@@ -1,0 +1,874 @@
+fileFormatVersion: 2
+guid: 401cdbb22b245804cbe8f95c75e9d3db
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6921273438402478743
+    second: TowerShootSS_0
+  - first:
+      213: -7208357221595772778
+    second: TowerShootSS_1
+  - first:
+      213: -2833197982105938664
+    second: TowerShootSS_2
+  - first:
+      213: 6594073710956635049
+    second: TowerShootSS_3
+  - first:
+      213: 3898393182900109605
+    second: TowerShootSS_4
+  - first:
+      213: 120431475346016029
+    second: TowerShootSS_5
+  - first:
+      213: -7728377464359980300
+    second: TowerShootSS_6
+  - first:
+      213: -6287850542414499629
+    second: TowerShootSS_7
+  - first:
+      213: 6515008100396279035
+    second: TowerShootSS_8
+  - first:
+      213: 3033534654268747542
+    second: TowerShootSS_9
+  - first:
+      213: -7965428871690674680
+    second: TowerShootSS_10
+  - first:
+      213: -70560680505808292
+    second: TowerShootSS_11
+  - first:
+      213: -717364552966384584
+    second: TowerShootSS_12
+  - first:
+      213: -1059057474653509192
+    second: TowerShootSS_13
+  - first:
+      213: -540481354318288020
+    second: TowerShootSS_14
+  - first:
+      213: 4848326423710941069
+    second: TowerShootSS_15
+  - first:
+      213: 4892140074140744477
+    second: TowerShootSS_16
+  - first:
+      213: -4329105482895464362
+    second: TowerShootSS_17
+  - first:
+      213: 8511304650445017469
+    second: TowerShootSS_18
+  - first:
+      213: 404517406706084881
+    second: TowerShootSS_19
+  - first:
+      213: -8514146165236324765
+    second: TowerShootSS_20
+  - first:
+      213: 2716590235185427437
+    second: TowerShootSS_21
+  - first:
+      213: -6964227969549871471
+    second: TowerShootSS_22
+  - first:
+      213: -1879431985565796873
+    second: TowerShootSS_23
+  - first:
+      213: -7764203362243449115
+    second: TowerShootSS_24
+  - first:
+      213: 6729333316258434532
+    second: TowerShootSS_25
+  - first:
+      213: -2393140302286914673
+    second: TowerShootSS_26
+  - first:
+      213: -7738280467690145723
+    second: TowerShootSS_27
+  - first:
+      213: 1444802171857628782
+    second: TowerShootSS_28
+  - first:
+      213: 1902261025525907122
+    second: TowerShootSS_29
+  - first:
+      213: -2508735789069346735
+    second: TowerShootSS_30
+  - first:
+      213: 7199489277253576535
+    second: TowerShootSS_31
+  - first:
+      213: 8677272643515301945
+    second: TowerShootSS_32
+  - first:
+      213: 2287907786931470611
+    second: TowerShootSS_33
+  - first:
+      213: -8151325987589022924
+    second: TowerShootSS_34
+  - first:
+      213: -9146872943475941548
+    second: TowerShootSS_35
+  - first:
+      213: -8594479028258832449
+    second: TowerShootSS_36
+  - first:
+      213: -106343716894673285
+    second: TowerShootSS_37
+  - first:
+      213: -3937206058368847312
+    second: TowerShootSS_38
+  - first:
+      213: 7708338594655619073
+    second: TowerShootSS_39
+  - first:
+      213: -8196463034897385974
+    second: TowerShootSS_40
+  - first:
+      213: 3857324246762280816
+    second: TowerShootSS_41
+  - first:
+      213: -7426903579502737054
+    second: TowerShootSS_42
+  - first:
+      213: -687887398962416233
+    second: TowerShootSS_43
+  - first:
+      213: 2675313846283652286
+    second: TowerShootSS_44
+  - first:
+      213: -2378035505378446432
+    second: TowerShootSS_45
+  - first:
+      213: -1866726045094489189
+    second: TowerShootSS_46
+  - first:
+      213: 5483451480887690086
+    second: TowerShootSS_47
+  - first:
+      213: 4835861496377871167
+    second: TowerShootSS_48
+  - first:
+      213: -7706284558908980730
+    second: TowerShootSS_49
+  - first:
+      213: 3826186627837417651
+    second: TowerShootSS_50
+  - first:
+      213: -2125208176024032278
+    second: TowerShootSS_51
+  - first:
+      213: 261832550149544997
+    second: TowerShootSS_52
+  - first:
+      213: 7470107481270235380
+    second: TowerShootSS_53
+  - first:
+      213: 7488504187858001307
+    second: TowerShootSS_54
+  - first:
+      213: 3535095508146439101
+    second: TowerShootSS_55
+  - first:
+      213: -8392140106538456517
+    second: TowerShootSS_56
+  - first:
+      213: 6122009129038998282
+    second: TowerShootSS_57
+  - first:
+      213: 734581753402345985
+    second: TowerShootSS_58
+  - first:
+      213: 2847424122474225403
+    second: TowerShootSS_59
+  - first:
+      213: -2549072808326812314
+    second: TowerShootSS_60
+  - first:
+      213: 2098234296839704191
+    second: TowerShootSS_61
+  - first:
+      213: -3882643066580973788
+    second: TowerShootSS_62
+  - first:
+      213: -8537406237088112424
+    second: TowerShootSS_63
+  - first:
+      213: -1446933824326946900
+    second: TowerShootSS_64
+  - first:
+      213: 3351073366577878779
+    second: TowerShootSS_65
+  - first:
+      213: -8002637344327292814
+    second: TowerShootSS_66
+  - first:
+      213: -898151812583621053
+    second: TowerShootSS_67
+  - first:
+      213: 8959843543817067178
+    second: TowerShootSS_68
+  - first:
+      213: -869290891712824245
+    second: TowerShootSS_69
+  - first:
+      213: -6033030173706746527
+    second: TowerShootSS_70
+  - first:
+      213: 3366959230695258897
+    second: TowerShootSS_71
+  - first:
+      213: -5943128021597205048
+    second: TowerShootSS_72
+  - first:
+      213: 7702859854032585584
+    second: TowerShootSS_73
+  - first:
+      213: 4845352646740930385
+    second: TowerShootSS_74
+  - first:
+      213: 3942885340826907588
+    second: TowerShootSS_75
+  - first:
+      213: 7281834640108553507
+    second: TowerShootSS_76
+  - first:
+      213: 7127107389458774969
+    second: TowerShootSS_77
+  - first:
+      213: 9120368235177915420
+    second: TowerShootSS_78
+  - first:
+      213: 8640530856193402750
+    second: TowerShootSS_79
+  - first:
+      213: 4955954191026049381
+    second: TowerShootSS_80
+  - first:
+      213: 5275142632511820194
+    second: TowerShootSS_81
+  - first:
+      213: -8538422722947323335
+    second: TowerShootSS_82
+  - first:
+      213: 2730996972189768365
+    second: TowerShootSS_83
+  - first:
+      213: 4994896142215261482
+    second: TowerShootSS_84
+  - first:
+      213: -2200501125306328706
+    second: TowerShootSS_85
+  - first:
+      213: 1454842477130069192
+    second: TowerShootSS_86
+  - first:
+      213: 5250084685727365237
+    second: TowerShootSS_87
+  - first:
+      213: -148881998012633498
+    second: TowerShootSS_88
+  - first:
+      213: 4368482283737387690
+    second: TowerShootSS_89
+  - first:
+      213: 1021642144374723256
+    second: TowerShootSS_90
+  - first:
+      213: -7561762311848427263
+    second: TowerShootSS_91
+  - first:
+      213: -5024204340214017699
+    second: TowerShootSS_92
+  - first:
+      213: -8543506437995870453
+    second: TowerShootSS_93
+  - first:
+      213: 2932765815339447856
+    second: TowerShootSS_94
+  - first:
+      213: -130707594083891441
+    second: TowerShootSS_95
+  - first:
+      213: 2504558538480783176
+    second: TowerShootSS_96
+  - first:
+      213: 3417845759596940881
+    second: TowerShootSS_97
+  - first:
+      213: 5716647260381069544
+    second: TowerShootSS_98
+  - first:
+      213: 7289970889464356781
+    second: TowerShootSS_99
+  - first:
+      213: -72127224123951117
+    second: TowerShootSS_100
+  - first:
+      213: -7547998147881250337
+    second: TowerShootSS_101
+  - first:
+      213: 4012030746210981385
+    second: TowerShootSS_102
+  - first:
+      213: 2988741013996376134
+    second: TowerShootSS_103
+  - first:
+      213: -6861027584464251292
+    second: TowerShootSS_104
+  - first:
+      213: 1223413090469805033
+    second: TowerShootSS_105
+  - first:
+      213: 9078827618739675851
+    second: TowerShootSS_106
+  - first:
+      213: 7047959598125680352
+    second: TowerShootSS_107
+  - first:
+      213: 4739038794806215435
+    second: TowerShootSS_108
+  - first:
+      213: -3638885176655851568
+    second: TowerShootSS_109
+  - first:
+      213: -9060468248860685008
+    second: TowerShootSS_110
+  - first:
+      213: -904308280083007256
+    second: TowerShootSS_111
+  - first:
+      213: -2437246803946777209
+    second: TowerShootSS_112
+  - first:
+      213: -3970408359762729611
+    second: TowerShootSS_113
+  - first:
+      213: 306553071243943832
+    second: TowerShootSS_114
+  - first:
+      213: 3768903638611179244
+    second: TowerShootSS_115
+  - first:
+      213: -1453782358521710902
+    second: TowerShootSS_116
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 2
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 300
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TowerShootSS_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 406
+        width: 170
+        height: 170
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96d7cae6a72b2ff90800000000000000
+      internalID: -6921273438402478743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerShootSS_1
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 406
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69889a86c45c6fb90800000000000000
+      internalID: -7208357221595772778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerShootSS_2
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 406
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 815d83a32757ea8d0800000000000000
+      internalID: -2833197982105938664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerShootSS_3
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 406
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a3ef4c6a1bd28b50800000000000000
+      internalID: 6594073710956635049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerShootSS_4
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 406
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 521c09df1ffd91630800000000000000
+      internalID: 3898393182900109605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerShootSS_5
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 406
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1786cbe9cbdba100800000000000000
+      internalID: 120431475346016029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerShootSS_6
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 216
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f270b294a94fb490800000000000000
+      internalID: -7728377464359980300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerShootSS_7
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 216
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d0f2a20f311db8a0800000000000000
+      internalID: -6287850542414499629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerShootSS_8
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 216
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf4a9ec6955f96a50800000000000000
+      internalID: 6515008100396279035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerShootSS_9
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 216
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61fa68912b7491a20800000000000000
+      internalID: 3033534654268747542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerShootSS_10
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 216
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80e9c33d4ac157190800000000000000
+      internalID: -7965428871690674680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerShootSS_11
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 216
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5a67575f61550ff0800000000000000
+      internalID: -70560680505808292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerShootSS_12
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 26
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8345bf56db86b06f0800000000000000
+      internalID: -717364552966384584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerShootSS_13
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 26
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b92e8286d87d41f0800000000000000
+      internalID: -1059057474653509192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerShootSS_14
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 26
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6be2246213df78f0800000000000000
+      internalID: -540481354318288020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerShootSS_15
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 26
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8f3e60e137b84340800000000000000
+      internalID: 4848326423710941069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TowerShootSS_16
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 26
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1bbc9e4a7f54e340800000000000000
+      internalID: 4892140074140744477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 9bbc87153fd327e4c9d54c2f23b9ef45
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":170.0,"y":170.0},"gridSpriteOffset":{"x":10.0,"y":0.0},"gridSpritePadding":{"x":22.0,"y":20.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      TowerShootSS_0: -6921273438402478743
+      TowerShootSS_1: -7208357221595772778
+      TowerShootSS_10: -7965428871690674680
+      TowerShootSS_11: -70560680505808292
+      TowerShootSS_12: -717364552966384584
+      TowerShootSS_13: -1059057474653509192
+      TowerShootSS_14: -540481354318288020
+      TowerShootSS_15: 4848326423710941069
+      TowerShootSS_16: 4892140074140744477
+      TowerShootSS_2: -2833197982105938664
+      TowerShootSS_3: 6594073710956635049
+      TowerShootSS_4: 3898393182900109605
+      TowerShootSS_5: 120431475346016029
+      TowerShootSS_6: -7728377464359980300
+      TowerShootSS_7: -6287850542414499629
+      TowerShootSS_8: 6515008100396279035
+      TowerShootSS_9: 3033534654268747542
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

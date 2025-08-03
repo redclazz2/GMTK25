@@ -83,7 +83,7 @@ public class WaveManager : MonoBehaviour
             }
         }
     }
-    
+
     void StartWave()
     {
         currentWave++;
@@ -93,6 +93,7 @@ public class WaveManager : MonoBehaviour
         PickNewSpawnZone();
         AnnounceWave(currentWave);
         Debug.Log("Wave " + currentWave + " starting at " + currentZone.name);
+        RuneManager.RollNewRunes();
     }
 
     public void AnnounceWave(int waveNumber, string text = "")
@@ -153,7 +154,7 @@ public class WaveManager : MonoBehaviour
         var prefab = list[Random.Range(0, list.Length)];
         var spawnPoint = currentZone.spawnPoints[Random.Range(0, currentZone.spawnPoints.Length)];
         
-        float radius = 1.5f;
+        float radius = 1.2f;
         float minDistance = 0.5f;
         float distance = Random.Range(minDistance, radius);
         Vector2 offset = Random.insideUnitCircle.normalized * distance;

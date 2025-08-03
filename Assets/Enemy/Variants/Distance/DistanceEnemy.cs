@@ -8,8 +8,15 @@ public class RangedEnemy : Enemy
     public GameObject projectilePrefab;
     public Transform firePoint;
     public float projectileSpeed = 10f;
+    public Animator animator;
 
     private float lastShotTime;
+
+    protected override void Start()
+    {
+        base.Start();
+        animator = GetComponent<Animator>();
+    }
 
     protected override void Update()
     {
@@ -23,6 +30,7 @@ public class RangedEnemy : Enemy
         if (distanceToPlayer <= shootingRange)
         {
             TryShoot();
+            
         }
         else
         {
@@ -30,16 +38,21 @@ public class RangedEnemy : Enemy
         }
     }
 
-    private void TryShoot()
+    public void TryShoot()
     {
         if (Time.time - lastShotTime >= fireRate)
         {
-            Shoot();
+            animator.SetBool("IsShooting", true);
+            //Shoot();
             lastShotTime = Time.time;
+        }
+        else
+        {
+            //animator.SetBool("IsShooting", false);
         }
     }
 
-    private void Shoot()
+    public void Shoot()
     {
         if (projectilePrefab == null) return;
 
@@ -53,5 +66,7 @@ public class RangedEnemy : Enemy
         {
             rb.linearVelocity = direction * projectileSpeed;
         }
+
+        animator.SetBool("IsShooting", false);
     }
 }

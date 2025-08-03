@@ -19,10 +19,13 @@ public class UndergroundEnemy : Enemy
     public float directModeCooldown = 2f;
     private bool isUsingPathfinding = false;
 
+    private Animator animator;
+
     protected override void Start()
     {
         base.Start();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
 
         if (spriteRenderer == null)
             return;
@@ -88,11 +91,13 @@ public class UndergroundEnemy : Enemy
             if (usePathfinding && pathfindingSprite != null)
             {
                 stats.SetInvulnerable(false);
+                animator.SetBool("IsWalking", true);
                 spriteRenderer.sprite = pathfindingSprite;
             }
             else if (!usePathfinding && directMovementSprite != null)
             {
                 stats.SetInvulnerable(true);
+                animator.SetBool("IsWalking", false);
                 spriteRenderer.sprite = directMovementSprite;
             }
         }

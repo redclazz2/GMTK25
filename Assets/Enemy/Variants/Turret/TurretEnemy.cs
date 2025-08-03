@@ -18,6 +18,8 @@ public class LaserEnemy : Enemy
     [SerializeField] private LayerMask obstacleLayerMask = -1;
     [SerializeField] private float laserMaxDistance = 20f;
 
+    public Animator animator;
+
     private LaserEnemyState currentState = LaserEnemyState.Cooldown;
     private float stateTimer = 0f;
     private Vector2 idlePosition;
@@ -37,6 +39,7 @@ public class LaserEnemy : Enemy
     protected override void Start()
     {
         base.Start();
+        animator = GetComponent<Animator>();
         PickIdlePosition();
         SetupLaserVisuals();
         EnterState(LaserEnemyState.Cooldown);
@@ -112,6 +115,7 @@ public class LaserEnemy : Enemy
 
     void UpdateCooldown()
     {
+        animator.SetBool("IsShooting", false);
         if (stateTimer >= cooldownDuration)
         {
             if (player == null) { stateTimer = 0f; return; }
@@ -232,6 +236,7 @@ public class LaserEnemy : Enemy
         switch (newState)
         {
             case LaserEnemyState.Cooldown:
+            animator.SetBool("IsShooting", false);
                 stats.SetInvulnerable(true);
                 if (Random.value < 0.2f) PickIdlePosition();
                 break;
@@ -239,6 +244,7 @@ public class LaserEnemy : Enemy
                 stats.SetInvulnerable(false);
                 break;
             case LaserEnemyState.Shooting:
+                animator.SetBool("IsShooting", true);
                 stats.SetInvulnerable(false);
                 frozenAimDirection = currentAimDirection;
                 break;
