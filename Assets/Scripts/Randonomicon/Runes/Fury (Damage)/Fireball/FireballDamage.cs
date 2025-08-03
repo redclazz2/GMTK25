@@ -9,10 +9,10 @@ public class FireballDamage : MonoBehaviour
     public float damage;
     [HideInInspector]
     public float criticalChance;
-    public float velocity = 4f;
-    public float damageInterval = 0.5f;
+    public float velocity = 3.5f;
+    public float damageInterval = 0.2f;
     [SerializeField]
-    private float lifetime = 3f;
+    private float lifetime = 4f;
 
     private Vector2 fixedDirection = Vector2.zero;
     private readonly Dictionary<IDamageable, float> enemyTimers = new();
@@ -163,7 +163,7 @@ public class FireballDamage : MonoBehaviour
         float dmg = enemy.ReceiveDamage(new DamageInfo
         {
             Attacker = owner,
-            BaseAmount = damage * 1.5f,
+            BaseAmount = damage * 2f,
             IsCritical = isCritical
         });
         StatsComponent.Get(owner).currentStats.health += dmg * StatsComponent.Get(owner).currentStats.lifeSteal;

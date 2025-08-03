@@ -2899,7 +2899,7 @@ PrefabInstance:
       objectReference: {fileID: 1881998613}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: waveDuration
-      value: 80
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: waveAnnouncer
@@ -2931,7 +2931,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: intermissionDuration
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3986254754857231665, guid: be954b7d047b69fd2897f62dd57d56cf, type: 3}
       propertyPath: minBatchSpawnInterval
