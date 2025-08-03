@@ -1,0 +1,546 @@
+fileFormatVersion: 2
+guid: 1090f1bf22a89c6468de01a9c9e8ef26
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4053281020051679152
+    second: SoldierWalkSS_0
+  - first:
+      213: 4547662155483736293
+    second: SoldierWalkSS_1
+  - first:
+      213: 3694778143776153700
+    second: SoldierWalkSS_2
+  - first:
+      213: 984910271918844778
+    second: SoldierWalkSS_3
+  - first:
+      213: 3204964678121295548
+    second: SoldierWalkSS_4
+  - first:
+      213: 7945464084346043660
+    second: SoldierWalkSS_5
+  - first:
+      213: -337565068371579387
+    second: SoldierWalkSS_6
+  - first:
+      213: 3357282425693683834
+    second: SoldierWalkSS_7
+  - first:
+      213: 265272073781221170
+    second: SoldierWalkSS_8
+  - first:
+      213: 690647336417122602
+    second: SoldierWalkSS_9
+  - first:
+      213: -4776732286674371845
+    second: SoldierWalkSS_10
+  - first:
+      213: -4213368237726229812
+    second: SoldierWalkSS_11
+  - first:
+      213: -309732474680638047
+    second: SoldierWalkSS_12
+  - first:
+      213: -8608521255004839520
+    second: SoldierWalkSS_13
+  - first:
+      213: -9113993199345459910
+    second: SoldierWalkSS_14
+  - first:
+      213: 4205049217599824384
+    second: SoldierWalkSS_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 2
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 300
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SoldierWalkSS_0
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 215
+        width: 135
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b7630fcc95204830800000000000000
+      internalID: 4053281020051679152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoldierWalkSS_1
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 216
+        width: 135
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e86818c2aa8c1f30800000000000000
+      internalID: 4547662155483736293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoldierWalkSS_2
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 216
+        width: 135
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 460a7af552d764330800000000000000
+      internalID: 3694778143776153700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoldierWalkSS_3
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 219
+        width: 135
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6b2b5d8caa1bad00800000000000000
+      internalID: 984910271918844778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoldierWalkSS_4
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 224
+        width: 135
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbe0815e4625a7c20800000000000000
+      internalID: 3204964678121295548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoldierWalkSS_5
+      rect:
+        serializedVersion: 2
+        x: 894
+        y: 224
+        width: 135
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0df113ec75f34e60800000000000000
+      internalID: 7945464084346043660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoldierWalkSS_6
+      rect:
+        serializedVersion: 2
+        x: 1070
+        y: 224
+        width: 135
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50ea12bdb5ab05bf0800000000000000
+      internalID: -337565068371579387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoldierWalkSS_7
+      rect:
+        serializedVersion: 2
+        x: 1246
+        y: 224
+        width: 135
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a70422a1496779e20800000000000000
+      internalID: 3357282425693683834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoldierWalkSS_8
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 23
+        width: 135
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2379f8eab8f6ea300800000000000000
+      internalID: 265272073781221170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoldierWalkSS_9
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 25
+        width: 135
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a295630e71ca59900800000000000000
+      internalID: 690647336417122602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoldierWalkSS_10
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 28
+        width: 135
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfa72a12b43a5bdb0800000000000000
+      internalID: -4776732286674371845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoldierWalkSS_11
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 29
+        width: 135
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cca1a6249eb1785c0800000000000000
+      internalID: -4213368237726229812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoldierWalkSS_12
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 25
+        width: 135
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a5024f84fb93bbf0800000000000000
+      internalID: -309732474680638047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoldierWalkSS_13
+      rect:
+        serializedVersion: 2
+        x: 894
+        y: 25
+        width: 135
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a1690a4783688880800000000000000
+      internalID: -8608521255004839520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoldierWalkSS_14
+      rect:
+        serializedVersion: 2
+        x: 1070
+        y: 25
+        width: 135
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3d10b32977948180800000000000000
+      internalID: -9113993199345459910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SoldierWalkSS_15
+      rect:
+        serializedVersion: 2
+        x: 1246
+        y: 25
+        width: 135
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 002621eebf55b5a30800000000000000
+      internalID: 4205049217599824384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      SoldierWalkSS_0: 4053281020051679152
+      SoldierWalkSS_1: 4547662155483736293
+      SoldierWalkSS_10: -4776732286674371845
+      SoldierWalkSS_11: -4213368237726229812
+      SoldierWalkSS_12: -309732474680638047
+      SoldierWalkSS_13: -8608521255004839520
+      SoldierWalkSS_14: -9113993199345459910
+      SoldierWalkSS_15: 4205049217599824384
+      SoldierWalkSS_2: 3694778143776153700
+      SoldierWalkSS_3: 984910271918844778
+      SoldierWalkSS_4: 3204964678121295548
+      SoldierWalkSS_5: 7945464084346043660
+      SoldierWalkSS_6: -337565068371579387
+      SoldierWalkSS_7: 3357282425693683834
+      SoldierWalkSS_8: 265272073781221170
+      SoldierWalkSS_9: 690647336417122602
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

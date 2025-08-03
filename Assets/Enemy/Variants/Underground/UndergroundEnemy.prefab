@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9079234667791722245}
   - component: {fileID: -2057073136333128291}
   - component: {fileID: 6441667518068274392}
+  - component: {fileID: 4519151514742912740}
   m_Layer: 9
   m_Name: UndergroundEnemy
   m_TagString: Enemy
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1922970429
   m_SortingLayer: 3
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ec9d3b26f6aef9d429f11563fe9a3713, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -214,3 +215,25 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.004668951, y: 0}
   m_Radius: 0.24320531
+--- !u!95 &4519151514742912740
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8924046968067302632}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 737a0fc7488a3cb4fb50d02ef88e4c31, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
