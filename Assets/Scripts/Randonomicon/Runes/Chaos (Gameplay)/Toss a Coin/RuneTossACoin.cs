@@ -17,7 +17,12 @@ public class RuneTossACoin : ActiveRuneStateBase
         playerCamera = Camera.main;
         if (playerCamera == null)
             playerCamera = GameObject.FindFirstObjectByType<Camera>();
-        _cooldownRemaining = _baseCooldownTime;
+    }
+
+    public override void Tick(float dt)
+    {
+        // Original tick logic for cooldown
+        base.Tick(dt);
     }
 
     protected override bool CanTrigger()

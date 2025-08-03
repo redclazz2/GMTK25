@@ -17,36 +17,48 @@ public class RuneGiantSlayer : PassiveRuneStateBase
     {
         base.Enter(owner);
 
-        size_delta = StatsComponent.Get(owner).currentStats.size * sizeReduction;
+        StatsComponent stats = StatsComponent.Get(owner);
+        float baseSizeScale = stats.currentStats.size;
+
+        // Calculate size reduction
+        size_delta = baseSizeScale * sizeReduction;
+
         ApplySizeAndDamageChanges();
     }
 
     private void ApplySizeAndDamageChanges()
     {
-        // 
-        // Calculamos el bonus de daño inversamente proporcional al tamaño
-        // Cuanto más pequeño, más daño
-        float baseSizeScale = StatsComponent.Get(owner).currentStats.size;
-        StatsComponent.Get(owner).currentStats.size -= size_delta;
-        float newSize = StatsComponent.Get(owner).currentStats.size - size_delta;
-        float sizeRatio = newSize / baseSizeScale; // Será < 1 cuando el tamaño se reduce
-        float inverseRatio = 1f / sizeRatio; // > 1 cuando el tamaño se reduce
+        StatsComponent stats = StatsComponent.Get(owner);
 
-        // Calculamos el multiplicador de daño (limitamos el máximo)
+        Debug.Log("SIZE DELTA:" + size_delta);
+
+        // Get base values before any changes
+        float baseSizeScale = stats.currentStats.size;
+        float baseDamage = stats.currentStats.damage;
+
+        // Apply size reduction ONCE
+        stats.currentStats.size -= size_delta;
+        float newSize = stats.currentStats.size; // This is the final size after reduction
+
+        // Calculate damage bonus based on size reduction
+        float sizeRatio = newSize / baseSizeScale; // Will be < 1 when size is reduced
+        float inverseRatio = 1f / sizeRatio; // > 1 when size is reduced
+
+        // Calculate damage multiplier (limit the maximum)
         float damageMultiplier = Mathf.Min(inverseRatio, maxDamageMultiplier);
 
-        // El bonus es la diferencia respecto al daño base
-        float baseDamage = StatsComponent.Get(owner).currentStats.damage;
+        // The bonus is the difference from base damage
         newDamageBonus = baseDamage * (damageMultiplier - 1f);
-        StatsComponent.Get(owner).currentStats.damage += newDamageBonus;
+        stats.currentStats.damage += newDamageBonus;
 
-        Debug.Log($"[RuneShrink] Size: {newSize:F2} (ratio: {sizeRatio:F2}), Damage multiplier: {damageMultiplier:F2}x");
+        Debug.Log($"[RuneGiantSlayer] Base Size: {baseSizeScale:F2} -> New Size: {newSize:F2} (ratio: {sizeRatio:F2}), Damage multiplier: {damageMultiplier:F2}x, Damage bonus: {newDamageBonus:F2}");
     }
 
     public override void Exit()
     {
         base.Exit();
-        StatsComponent.Get(owner).currentStats.size += size_delta;
-        StatsComponent.Get(owner).currentStats.damage -= newDamageBonus;
+        StatsComponent stats = StatsComponent.Get(owner);
+        stats.currentStats.size += size_delta;
+        stats.currentStats.damage -= newDamageBonus;
     }
 }

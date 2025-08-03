@@ -16,7 +16,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   description: Decreases your size and do additional damage proportional to your
     size
-  runeType: 8
+  runeType: 10
   statDelta:
     damage: 0
     lifeSteal: 0

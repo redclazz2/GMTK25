@@ -30,14 +30,14 @@ public class RuneManager : MonoBehaviour
     public bool runeChaos = false;
 
     // Current active runes (for UI reading)
-    [System.NonSerialized] public RuneStateData currentFuryRune;
-    [System.NonSerialized] public RuneStateData currentZephyrRune;
-    [System.NonSerialized] public RuneStateData currentChaosRune;
-    [System.NonSerialized] public RuneStateData currentBulwarkRune;
-    [System.NonSerialized] public RuneStateData currentColossusRune;
-    [System.NonSerialized] public RuneStateData currentChainsRune;
-    [System.NonSerialized] public RuneStateData currentChaosExtra1;
-    [System.NonSerialized] public RuneStateData currentChaosExtra2;
+    [HideInInspector] public RuneStateData currentFuryRune;
+    [HideInInspector] public RuneStateData currentZephyrRune;
+    [HideInInspector] public RuneStateData currentChaosRune;
+    [HideInInspector] public RuneStateData currentBulwarkRune;
+    [HideInInspector] public RuneStateData currentColossusRune;
+    [HideInInspector] public RuneStateData currentChainsRune;
+    [HideInInspector] public RuneStateData currentChaosExtra1;
+    [HideInInspector] public RuneStateData currentChaosExtra2;
 
     private GameObject playerObject;
     private RuneComponent playerRuneComponent;
